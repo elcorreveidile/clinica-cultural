@@ -13,7 +13,7 @@ export default async function EmergenciaPage() {
           🚨 Emergencia Lingüística
         </h1>
         <p className="text-clinic-blue/60">
-          Tu línea directa con El Doctor (IA). Pregúntale cualquier duda de español.
+          Tu línea directa con La Doctora (IA). Pregúntale cualquier duda de español.
         </p>
       </div>
       <ChatBox level={user.currentLevel ?? 'B1'} />

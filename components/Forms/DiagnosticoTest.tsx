@@ -4,9 +4,9 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 
-// Frases clínicas que rotan mientras El Doctor "analiza".
+// Frases clínicas que rotan mientras La Doctora "analiza".
 const FRASES_ESPERA = [
-  'El Doctor está auscultando tu español… 🩺',
+  'La Doctora está auscultando tu español… 🩺',
   'Revisando tu radiografía gramatical… 🦴',
   'Analizando las muestras de expresión escrita… 🔬',
   'Tomando la tensión a tus tiempos verbales… 💉',
@@ -199,7 +199,7 @@ export default function DiagnosticoTest() {
           <div className="text-4xl mb-4 animate-pulse">🩺</div>
           <p className="text-clinic-blue font-semibold">{FRASES_ESPERA[fraseEspera]}</p>
           <p className="text-clinic-blue/50 text-sm mt-2">
-            El Doctor está con tu diagnóstico. Esto puede tardar unos segundos…
+            La Doctora está con tu diagnóstico. Esto puede tardar unos segundos…
           </p>
         </div>
       ) : (
