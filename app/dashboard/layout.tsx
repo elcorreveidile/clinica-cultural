@@ -1,8 +1,8 @@
-import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { getSessionUser } from '@/lib/auth';
 import { displayName } from '@/lib/utils';
 import DashboardNav from '@/components/Dashboard/DashboardNav';
+import Logo from '@/components/Logo';
 
 export default async function DashboardLayout({
   children,
@@ -17,10 +17,7 @@ export default async function DashboardLayout({
       {/* Topbar */}
       <header className="sticky top-0 z-20 bg-white border-b border-clinic-gray">
         <div className="px-4 md:px-8 py-3 flex items-center justify-between">
-          <Link href="/dashboard" className="flex items-center gap-2">
-            <img src="/imgs/logos/logo.png" alt="Clínica Cultural" className="h-8 w-8 object-contain" />
-            <span className="font-bold text-clinic-red font-heading">Clínica Cultural</span>
-          </Link>
+          <Logo href="/dashboard" />
           <div className="flex items-center gap-4">
             <span className="hidden sm:flex items-center gap-2 text-sm text-clinic-blue/70">
               <span className="w-8 h-8 rounded-full bg-clinic-green text-white flex items-center justify-center font-bold uppercase">
