@@ -69,8 +69,9 @@ export default function Footer() {
           >
             <span className="text-white/80 group-hover:text-white transition">
               Desarrollado por{' '}
-              <strong className="text-clinic-gold">Por 2 duros</strong> ·{' '}
-              <span className="underline decoration-clinic-gold/40">por2duros.com</span>
+              <strong className="text-clinic-gold underline decoration-clinic-gold/40">
+                Por 2 duros
+              </strong>
             </span>
             <span className="text-white/50 italic min-h-[1.25rem] opacity-70 group-hover:opacity-100 transition">
               “{frase}”
