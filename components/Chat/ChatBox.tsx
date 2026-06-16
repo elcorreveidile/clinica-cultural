@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import type { ChatMessage } from '@/lib/types';
+import ChatMarkdown from '@/components/Chat/ChatMarkdown';
 
 export default function ChatBox({ level }: { level: string }) {
   const [messages, setMessages] = useState<ChatMessage[]>([
@@ -62,13 +63,17 @@ export default function ChatBox({ level }: { level: string }) {
             className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             <div
-              className={`max-w-[80%] px-4 py-2.5 rounded-2xl whitespace-pre-wrap text-sm leading-relaxed ${
+              className={`max-w-[80%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
                 m.role === 'user'
-                  ? 'bg-clinic-red text-white rounded-br-sm'
+                  ? 'bg-clinic-red text-white rounded-br-sm whitespace-pre-wrap'
                   : 'bg-clinic-gray/50 text-clinic-blue rounded-bl-sm'
               }`}
             >
-              {m.content}
+              {m.role === 'assistant' ? (
+                <ChatMarkdown content={m.content} />
+              ) : (
+                m.content
+              )}
             </div>
           </div>
         ))}
