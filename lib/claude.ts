@@ -77,15 +77,18 @@ export async function analizarDiagnostico(input: {
   }
 
   const sys = `Eres "El Doctor" de la Clínica Cultural y Lingüística de Español (UGR). Analizas el diagnóstico de un paciente.
-Responde EXCLUSIVAMENTE con un JSON válido (sin texto fuera del JSON) con esta forma exacta:
-{"writingScore": <entero 0-100>, "writingLevel": "<A1|A2|B1|B2|C1|C2>", "analisis": "<markdown en español>"}
 
-El campo "analisis" (markdown, en español, cálido y conciso) debe incluir:
+Responde en español, en MARKDOWN normal. NUNCA uses JSON ni bloques de código (\`\`\`).
+La PRIMERA línea de tu respuesta debe ser EXACTAMENTE: SCORE: N
+(donde N es un entero de 0 a 100 con la nota de expresión escrita). Nada más en esa línea.
+A partir de la segunda línea, escribe el análisis con estas secciones (cálido y conciso):
+
 ## ✍️ Corrección de tu expresión escrita
-Lista los errores reales del texto, uno por línea con el formato: ❌ "fragmento" → ✅ "corrección" — explicación breve. Si no hay errores relevantes, felicítale.
-Incluye también una versión mejorada del texto.
+Lista los errores reales del texto, cada uno en su línea con el formato: ❌ "fragmento" → ✅ "corrección" — explicación breve. Si no hay errores relevantes, felicítale. Añade una versión mejorada del texto.
+
 ## 📊 Tu nivel por destrezas
 Comenta brevemente: Gramática (${input.grammar}%), Comprensión auditiva (${input.listening}%), Comprensión lectora (${input.reading}%) y Expresión escrita, con fortalezas y áreas de mejora.
+
 ## 💊 Recomendaciones
 Qué trabajar y a dónde ir, enlazando en markdown: [Farmacias](/dashboard/farmacias), [Actividades](/dashboard/actividades) y [El Doctor](/dashboard/emergencia).`;
 
@@ -101,17 +104,17 @@ Texto de expresión escrita del paciente:
   });
 
   const block = response.content[0];
-  const raw = block && block.type === 'text' ? block.text : '';
+  let md = block && block.type === 'text' ? block.text.trim() : '';
 
-  try {
-    const match = raw.match(/\{[\s\S]*\}/);
-    const json = JSON.parse(match ? match[0] : raw);
-    return {
-      writingScore:
-        typeof json.writingScore === 'number' ? Math.round(json.writingScore) : null,
-      analisisMarkdown: String(json.analisis ?? raw),
-    };
-  } catch {
-    return { writingScore: null, analisisMarkdown: raw || 'No se pudo generar el análisis.' };
+  // Extrae la nota de la primera línea "SCORE: N" y la elimina del texto.
+  let writingScore: number | null = null;
+  const m = md.match(/^SCORE:\s*(\d{1,3})/i);
+  if (m) {
+    writingScore = Math.min(100, parseInt(m[1], 10));
+    md = md.replace(/^SCORE:\s*\d{1,3}.*$/im, '').trim();
   }
+  // Por si acaso envuelve todo en un bloque de código, lo quitamos.
+  md = md.replace(/^```(?:markdown)?\s*/i, '').replace(/```$/i, '').trim();
+
+  return { writingScore, analisisMarkdown: md || 'No se pudo generar el análisis.' };
 }
