@@ -10,7 +10,7 @@ export default function ChatBox({ level }: { level: string }) {
     {
       role: 'assistant',
       content:
-        '¡Hola! Soy El Doctor de la Clínica. Cuéntame tu urgencia lingüística: una duda de gramática, una palabra, una frase que no entiendes… Estoy aquí para ayudarte. 🩺',
+        '¡Hola! Soy La Doctora de la Clínica. Cuéntame tu urgencia lingüística: una duda de gramática, una palabra, una frase que no entiendes… Estoy aquí para ayudarte. 🩺',
     },
   ]);
   const [input, setInput] = useState('');
@@ -41,7 +41,7 @@ export default function ChatBox({ level }: { level: string }) {
       if (!res.ok) throw new Error(data.error);
       setMessages([...next, { role: 'assistant', content: data.response }]);
     } catch {
-      toast.error('No pudimos contactar con El Doctor. Inténtalo de nuevo.');
+      toast.error('No pudimos contactar con La Doctora. Inténtalo de nuevo.');
       setMessages(messages);
     } finally {
       setLoading(false);
@@ -52,7 +52,7 @@ export default function ChatBox({ level }: { level: string }) {
     <div className="bg-white border border-clinic-gray rounded-2xl flex flex-col h-[70vh]">
       <div className="px-5 py-3 border-b border-clinic-gray flex items-center gap-2">
         <span className="w-2.5 h-2.5 rounded-full bg-clinic-green animate-pulse" />
-        <span className="font-semibold text-clinic-blue">El Doctor</span>
+        <span className="font-semibold text-clinic-blue">La Doctora</span>
         <span className="ml-auto text-xs text-clinic-blue/50">Tu nivel: {level}</span>
       </div>
 
@@ -80,7 +80,7 @@ export default function ChatBox({ level }: { level: string }) {
         {loading && (
           <div className="flex justify-start">
             <div className="bg-clinic-gray/50 text-clinic-blue/60 px-4 py-2.5 rounded-2xl rounded-bl-sm text-sm">
-              El Doctor está escribiendo…
+              La Doctora está escribiendo…
             </div>
           </div>
         )}

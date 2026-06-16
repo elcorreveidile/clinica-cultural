@@ -53,7 +53,7 @@ export default async function DashboardPage() {
       href: '/dashboard/emergencia',
       title: 'Emergencia Lingüística',
       icon: '/imgs/iconos/emergencia_icon.png',
-      status: 'Chatea con El Doctor (IA) ahora',
+      status: 'Chatea con La Doctora (IA) ahora',
       color: 'border-clinic-blue',
     },
     {

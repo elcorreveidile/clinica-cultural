@@ -9,7 +9,7 @@ const anthropic = isConfigured ? new Anthropic({ apiKey }) : null;
 const MODEL = process.env.CLAUDE_MODEL || 'claude-sonnet-4-6';
 
 function systemPrompt(userLevel: string): string {
-  return `Eres "El Doctor", el tutor de español de la Clínica Cultural y Lingüística de Español de la Universidad de Granada (en colaboración con el Centro de Lenguas Modernas). Atiendes la "Línea de Emergencia Lingüística" dentro del panel del paciente.
+  return `Eres "La Doctora", la tutora de español de la Clínica Cultural y Lingüística de Español de la Universidad de Granada (en colaboración con el Centro de Lenguas Modernas). Atiendes la "Línea de Emergencia Lingüística" dentro del panel del paciente.
 El nivel del estudiante (MCER) es ${userLevel}.
 
 CONOCES LA PROPIA CLÍNICA. El paciente tiene en su panel estas secciones (con su ruta). Recomiéndaselas en vez de servicios externos:
@@ -41,7 +41,7 @@ export async function askClaudeLinguistic(
 ): Promise<string> {
   if (!anthropic) {
     const last = history[history.length - 1]?.content ?? '';
-    return `🔧 (Modo demo — falta CLAUDE_API_KEY) Soy El Doctor de la Clínica. He recibido tu consulta: "${last}". Cuando configures tu clave de Claude API en .env, responderé con un diagnóstico lingüístico real adaptado a tu nivel ${userLevel}.`;
+    return `🔧 (Modo demo — falta CLAUDE_API_KEY) Soy La Doctora de la Clínica. He recibido tu consulta: "${last}". Cuando configures tu clave de Claude API en .env, responderé con un diagnóstico lingüístico real adaptado a tu nivel ${userLevel}.`;
   }
 
   const response = await anthropic.messages.create({
@@ -76,7 +76,7 @@ export async function analizarDiagnostico(input: {
     };
   }
 
-  const sys = `Eres "El Doctor" de la Clínica Cultural y Lingüística de Español (UGR). Analizas el diagnóstico de un paciente.
+  const sys = `Eres "La Doctora" de la Clínica Cultural y Lingüística de Español (UGR). Analizas el diagnóstico de un paciente.
 
 Responde en español, en MARKDOWN normal. NUNCA uses JSON ni bloques de código (\`\`\`).
 La PRIMERA línea de tu respuesta debe ser EXACTAMENTE: SCORE: N
@@ -84,13 +84,18 @@ La PRIMERA línea de tu respuesta debe ser EXACTAMENTE: SCORE: N
 A partir de la segunda línea, escribe el análisis con estas secciones (cálido y conciso):
 
 ## ✍️ Corrección de tu expresión escrita
-Lista los errores reales del texto, cada uno en su línea con el formato: ❌ "fragmento" → ✅ "corrección" — explicación breve. Si no hay errores relevantes, felicítale. Añade una versión mejorada del texto.
+Lista los errores MÁS RELEVANTES (máximo 12), cada uno en su línea con el formato: ❌ "fragmento" → ✅ "corrección" — explicación breve. Si no hay errores relevantes, felicítale.
+
+## ✅ Versión mejorada del texto
+Reescribe el texto del paciente corregido y mejorado.
 
 ## 📊 Tu nivel por destrezas
 Comenta brevemente: Gramática (${input.grammar}%), Comprensión auditiva (${input.listening}%), Comprensión lectora (${input.reading}%) y Expresión escrita, con fortalezas y áreas de mejora.
 
 ## 💊 Recomendaciones
-Qué trabajar y a dónde ir, enlazando en markdown: [Farmacias](/dashboard/farmacias), [Actividades](/dashboard/actividades) y [El Doctor](/dashboard/emergencia).`;
+Qué trabajar y a dónde ir, enlazando en markdown: [Farmacias](/dashboard/farmacias), [Actividades](/dashboard/actividades) y [La Doctora](/dashboard/emergencia).
+
+Sé completo pero conciso para no exceder el espacio.`;
 
   const userMsg = `Nivel orientativo: ${input.nivel}. Gramática ${input.grammar}%, Auditiva ${input.listening}%, Lectora ${input.reading}%.
 Texto de expresión escrita del paciente:
@@ -98,7 +103,7 @@ Texto de expresión escrita del paciente:
 
   const response = await anthropic.messages.create({
     model: MODEL,
-    max_tokens: 1800,
+    max_tokens: 4000,
     system: sys,
     messages: [{ role: 'user', content: userMsg }],
   });

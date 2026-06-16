@@ -2,9 +2,10 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { getSessionUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { limpiarAnalisis } from '@/lib/utils';
+import { limpiarAnalisis, displayName } from '@/lib/utils';
 import DiagnosticoTest from '@/components/Forms/DiagnosticoTest';
 import ChatMarkdown from '@/components/Chat/ChatMarkdown';
+import DescargarInformeButton from '@/components/DescargarInformeButton';
 
 export default async function DiagnosticoPage({
   searchParams,
@@ -21,6 +22,27 @@ export default async function DiagnosticoPage({
 
   const mostrarResultados =
     diagnosis && user.currentLevel && searchParams?.rehacer !== '1';
+
+  const informeData = diagnosis
+    ? {
+        numero: diagnosis.id.slice(0, 8).toUpperCase(),
+        fecha: new Date(diagnosis.createdAt).toLocaleDateString('es-ES', {
+          day: '2-digit',
+          month: 'long',
+          year: 'numeric',
+        }),
+        nombre: displayName(user),
+        email: user.email,
+        nivel: diagnosis.assessedLevel ?? user.currentLevel ?? '—',
+        parametros: [
+          { destreza: 'Gramática y uso', valor: diagnosis.grammarScore },
+          { destreza: 'Comprensión auditiva', valor: diagnosis.listeningComprehensionScore },
+          { destreza: 'Comprensión lectora', valor: diagnosis.readingComprehensionScore },
+          { destreza: 'Expresión escrita (IA)', valor: diagnosis.writtenExpressionScore },
+        ],
+        analisis: limpiarAnalisis(diagnosis.initialTreatmentPlan),
+      }
+    : null;
 
   return (
     <div className="space-y-4 animate-fade-in">
@@ -68,7 +90,7 @@ export default async function DiagnosticoPage({
                 href="/dashboard/emergencia"
                 className="px-5 py-2.5 border border-clinic-gray rounded-lg font-semibold text-clinic-blue hover:bg-clinic-gray/40"
               >
-                Consultar a El Doctor
+                Consultar a La Doctora
               </Link>
               <Link
                 href="/dashboard/diagnostico?rehacer=1"
@@ -86,13 +108,12 @@ export default async function DiagnosticoPage({
                 <h2 className="text-xl font-bold text-clinic-blue flex items-center gap-2">
                   🧪 Tu análisis lingüístico
                 </h2>
-                <Link
-                  href="/informe"
-                  target="_blank"
-                  className="px-4 py-2 bg-clinic-red text-white rounded-lg text-sm font-semibold hover:bg-clinic-red/90"
-                >
-                  📄 Descargar informe (PDF)
-                </Link>
+                {informeData && (
+                  <DescargarInformeButton
+                    data={informeData}
+                    filename={`informe-diagnostico-${informeData.nivel}.pdf`}
+                  />
+                )}
               </div>
               <div className="text-clinic-blue/85">
                 <ChatMarkdown content={limpiarAnalisis(diagnosis.initialTreatmentPlan)} />
