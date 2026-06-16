@@ -5,8 +5,19 @@ import { prisma } from '@/lib/prisma';
 import type { SessionUser, UserRole, LanguageLevel } from '@/lib/types';
 
 export const SESSION_COOKIE = 'cc_session';
-const SESSION_TTL_SECONDS = 60 * 60 * 24 * 7; // 7 días
+export const SESSION_TTL_SECONDS = 60 * 60 * 24 * 7; // 7 días
 const MAGIC_LINK_TTL_MINUTES = 15;
+
+/** Opciones de la cookie de sesión, reutilizables al fijarla en una respuesta. */
+export function sessionCookieOptions() {
+  return {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax' as const,
+    path: '/',
+    maxAge: SESSION_TTL_SECONDS,
+  };
+}
 
 function secretKey(): Uint8Array {
   const secret = process.env.SESSION_SECRET;
