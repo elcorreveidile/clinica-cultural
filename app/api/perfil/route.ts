@@ -12,6 +12,13 @@ const schema = z.object({
   dateOfBirth: opt(20), // yyyy-mm-dd
   phone: opt(40),
   bio: opt(1000),
+  // Foto como data URL (se recorta y comprime en el cliente). ~3 MB de margen.
+  profilePictureUrl: z
+    .string()
+    .max(3_000_000)
+    .refine((v) => v === '' || v.startsWith('data:image/'), 'Imagen no válida')
+    .optional()
+    .or(z.literal('')),
 });
 
 const clean = (v?: string) => (v && v.trim() ? v.trim() : null);
@@ -35,6 +42,7 @@ export async function POST(request: NextRequest) {
       nativeLanguage: clean(d.nativeLanguage),
       phone: clean(d.phone),
       bio: clean(d.bio),
+      profilePictureUrl: clean(d.profilePictureUrl),
       dateOfBirth: d.dateOfBirth ? new Date(d.dateOfBirth) : null,
     },
   });

@@ -23,6 +23,7 @@ export default async function CompletarPerfilPage() {
     dateOfBirth: u?.dateOfBirth ? u.dateOfBirth.toISOString().slice(0, 10) : '',
     phone: u?.phone ?? '',
     bio: u?.bio ?? '',
+    profilePictureUrl: u?.profilePictureUrl ?? '',
   };
 
   return (
