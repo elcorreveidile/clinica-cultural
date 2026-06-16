@@ -24,7 +24,7 @@ const GRAMATICA: MCQ[] = [
   { q: 'No creo que ___ verdad.', options: ['es', 'sea', 'será', 'era'], answer: 1 },
   { q: 'Cuando ___ a casa, llámame.', options: ['llegas', 'llegues', 'llegarás', 'llegaste'], answer: 1 },
   { q: 'Si ___ dinero, viajaría por el mundo.', options: ['tengo', 'tuviera', 'tendré', 'tenía'], answer: 1 },
-  { q: 'El libro ___ que te hablé es muy bueno.', options: ['que', 'del', 'cuyo', 'del que'], answer: 3 },
+  { q: 'El libro ___ te hablé es muy bueno.', options: ['que', 'del', 'cuyo', 'del que'], answer: 3 },
   { q: '___ terminado el trabajo antes de las cinco.', options: ['He', 'Había', 'Habré', 'Haya'], answer: 2 },
   { q: 'Me molesta que la gente ___ tarde.', options: ['llega', 'llegue', 'llegará', 'llegaba'], answer: 1 },
   { q: 'Te lo dije para que lo ___ en cuenta.', options: ['tienes', 'tengas', 'tuvieras', 'tendrás'], answer: 2 },
