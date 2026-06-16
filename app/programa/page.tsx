@@ -97,7 +97,8 @@ const planes: {
   },
 ];
 
-export default function ProgramaPage() {
+export default async function ProgramaPage() {
+  const user = await getSessionUser();
   return (
     <main className="min-h-screen bg-clinic-white">
       {/* Header */}
@@ -108,8 +109,11 @@ export default function ProgramaPage() {
             <Link href="/sobre-clinica" className="hidden sm:inline text-clinic-blue/70 hover:text-clinic-blue">
               Sobre la clínica
             </Link>
-            <Link href="/login" className="px-5 py-2 bg-clinic-red text-white rounded-lg font-semibold hover:bg-clinic-red/90 transition">
-              Empezar
+            <Link
+              href={user ? '/dashboard' : '/login'}
+              className="px-5 py-2 bg-clinic-red text-white rounded-lg font-semibold hover:bg-clinic-red/90 transition"
+            >
+              {user ? 'Mi Dashboard' : 'Empezar'}
             </Link>
           </nav>
         </div>
