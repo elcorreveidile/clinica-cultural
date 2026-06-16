@@ -78,6 +78,13 @@ export default async function DashboardPage() {
       color: 'border-clinic-red',
     },
     {
+      href: '/dashboard/enfermeria-lc',
+      title: 'Enfermería LC',
+      icon: '/imgs/iconos/tutoria_icon.png',
+      status: 'Mentoría y parejas lingüísticas',
+      color: 'border-clinic-green',
+    },
+    {
       href: '/dashboard/portafolio',
       title: 'Portafolio',
       icon: '/imgs/iconos/portafolio_icon.png',
