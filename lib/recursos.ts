@@ -141,38 +141,125 @@ Completa mentalmente con **por** o **para**:
   ],
   cultural: [
     {
-      id: 'alhambra-101',
-      titulo: 'Cápsula: la Alhambra en 5 claves',
+      id: 'alhambra-historia',
+      titulo: 'Cápsula 1 · Historia: los nazaríes',
       tipo: 'pildora',
       formato: 'texto',
       nivel: 'B1',
-      duracionMin: 9,
-      descripcion: 'Lo esencial para entender el monumento (y su léxico).',
-      contenido: `## La Alhambra en 5 claves
+      duracionMin: 8,
+      descripcion: 'Quién construyó la Alhambra y por qué es tan especial.',
+      contenido: `## La Alhambra y la dinastía nazarí
 
-1. **Ciudad palatina** nazarí del siglo XIII–XIV.
-2. **Patios y agua:** el Patio de los Leones y el de los Arrayanes.
-3. **Yeserías y azulejos:** decoración geométrica y caligráfica.
-4. **El lema nazarí:** *"Solo Dios es vencedor"*, repetido por los muros.
-5. **El Generalife:** los jardines de recreo de los sultanes.
+La Alhambra fue la **ciudad palatina** del Reino Nazarí de Granada, el último reino musulmán de la península ibérica (siglos **XIII–XV**). La levantaron sobre todo **Yusuf I** y **Mohammed V** en el siglo XIV.
 
-📌 Léxico: *patio, fuente, arco de herradura, alicatado, mirador*.`,
+Su nombre viene del árabe *al-qal'a al-hamra*, **"el castillo rojo"**, por el color de sus muros al atardecer.
+
+En **1492**, con la conquista por los Reyes Católicos, terminó el reino nazarí; años después se añadió el **Palacio de Carlos V**, de estilo renacentista.
+
+📌 **Léxico:** *dinastía, reino, palacio, fortaleza, conquista, siglo.*
+
+> 🧠 Mini‑reto: ¿qué significa "Alhambra" y de qué lengua viene?`,
     },
     {
-      id: 'tapeo-cultura',
-      titulo: 'Jarabe cultural: el arte del tapeo',
+      id: 'alhambra-espacios',
+      titulo: 'Cápsula 2 · Un paseo por sus espacios',
       tipo: 'jarabe',
       formato: 'texto',
+      nivel: 'B1',
+      duracionMin: 9,
+      descripcion: 'Las cuatro zonas que no te puedes perder.',
+      contenido: `## Las cuatro zonas de la Alhambra
+
+1. **La Alcazaba** — la parte militar, la más antigua. Desde la **Torre de la Vela** hay vistas de toda Granada.
+2. **Los Palacios Nazaríes** — el corazón del conjunto: el **Patio de los Arrayanes** y el famoso **Patio de los Leones**.
+3. **El Generalife** — la *almunia* (finca de recreo) con sus **jardines** y huertas.
+4. **El Palacio de Carlos V** — renacentista, con un sorprendente **patio circular**.
+
+📌 **Léxico:** *torre, muralla, patio, jardín, sala, fuente, mirador.*
+
+> 🧠 Mini‑reto: ¿qué zona usarías para defender la ciudad?`,
+    },
+    {
+      id: 'alhambra-agua',
+      titulo: 'Cápsula 3 · El agua, alma del palacio',
+      tipo: 'pomada',
+      formato: 'texto',
+      nivel: 'B1',
+      duracionMin: 7,
+      descripcion: 'Por qué el agua está en todas partes.',
+      contenido: `## El agua en la Alhambra
+
+Para la cultura andalusí, el agua simbolizaba la **vida** y el **paraíso**. Por eso la Alhambra está llena de **fuentes, albercas y acequias**.
+
+- La **Acequia Real** trae el agua desde el río Darro.
+- El **Patio de los Arrayanes** tiene una gran **alberca** que refleja la fachada.
+- La **Fuente de los Leones** es todo un reloj de agua del siglo XIV.
+
+🔊 Fíjate en el sonido del agua: forma parte de la experiencia.
+
+📌 **Léxico:** *fuente, alberca, acequia, surtidor, caudal, reflejo.*`,
+    },
+    {
+      id: 'alhambra-arte',
+      titulo: 'Cápsula 4 · El arte nazarí',
+      tipo: 'pildora',
+      formato: 'texto',
+      nivel: 'B2',
+      duracionMin: 8,
+      descripcion: 'Yeserías, alicatados y mocárabes: aprende a mirarlos.',
+      contenido: `## Cómo mirar la decoración nazarí
+
+La Alhambra no usa figuras humanas, sino tres recursos decorativos:
+
+- **Yeserías:** relieves de yeso con motivos vegetales (*ataurique*) y geométricos.
+- **Alicatados:** mosaicos de azulejos de colores formando patrones geométricos.
+- **Mocárabes:** esas "estalactitas" de yeso en las bóvedas, como la **Sala de los Abencerrajes**.
+
+Todo se basa en la **repetición** y la **simetría**, símbolo del infinito.
+
+📌 **Léxico:** *yeso, azulejo, bóveda, relieve, motivo, geométrico, simétrico.*
+
+> 🧠 Mini‑reto: describe en una frase la diferencia entre *yesería* y *alicatado*.`,
+    },
+    {
+      id: 'alhambra-lema',
+      titulo: 'Cápsula 5 · El lema y las leyendas',
+      tipo: 'jarabe',
+      formato: 'texto',
+      nivel: 'B2',
+      duracionMin: 7,
+      descripcion: 'La frase escrita en los muros y los cuentos que inspiró.',
+      contenido: `## "Solo Dios es vencedor"
+
+Por los muros se repite en árabe el lema nazarí: **"Wa la galib illa Allah"** → *"Y no hay vencedor sino Dios"*. La **caligrafía** es, a la vez, decoración y mensaje.
+
+Siglos después, el escritor estadounidense **Washington Irving** vivió en la Alhambra y escribió *Cuentos de la Alhambra* (1832), que llenó el monumento de **leyendas** y lo hizo famoso en todo el mundo.
+
+📌 **Léxico:** *lema, caligrafía, leyenda, cuento, escritor, inspirar.*
+
+> 🧠 Mini‑reto: ¿qué escritor ayudó a hacer mundialmente famosa la Alhambra?`,
+    },
+    {
+      id: 'alhambra-visita',
+      titulo: 'Cápsula 6 · Inyección práctica: tu visita',
+      tipo: 'inyeccion',
+      formato: 'interactivo',
       nivel: 'A2',
-      duracionMin: 5,
-      descripcion: 'Cómo funciona el tapeo en Granada.',
-      contenido: `## El tapeo, paso a paso
+      duracionMin: 10,
+      descripcion: 'Frases y vocabulario para visitar la Alhambra sin problemas.',
+      contenido: `## Sobrevive a tu visita (en español)
 
-1. Entras en un bar y pides una **bebida** (caña, tinto, refresco).
-2. Te traen una **tapa gratis** que elige el camarero.
-3. Si quieres seguir, te **mueves a otro bar** ("ir de tapas").
+**Antes:** las entradas se agotan; **compra con antelación** y lleva tu **DNI o pasaporte**. La entrada a los Palacios Nazaríes tiene **hora exacta**.
 
-💬 Frases útiles: *"¿Me pones una caña?"*, *"¿Qué tapa lleva?"*, *"La cuenta, por favor."*`,
+**Frases útiles:**
+- *"¿Dónde está la entrada a los Palacios Nazaríes?"*
+- *"¿A qué hora cierra el Generalife?"*
+- *"¿Se puede hacer fotos aquí?"*
+- *"Perdone, ¿por dónde se va a la Alcazaba?"*
+
+📌 **Léxico:** *entrada, taquilla, horario, visita guiada, audioguía, recorrido.*
+
+> 👉 Practica estas preguntas en voz alta con **La Doctora** en la [Línea de Emergencia](/dashboard/emergencia).`,
     },
   ],
   conversation: [
