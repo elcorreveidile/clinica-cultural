@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { getSessionUser } from '@/lib/auth';
 import Logo from '@/components/Logo';
 import Footer from '@/components/Footer';
+import Colaboradores from '@/components/Colaboradores';
 
 const features = [
   {
@@ -173,6 +174,34 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Invitación a estudiantes locales (mentores) */}
+      <section className="max-w-6xl mx-auto px-6 pb-4">
+        <div className="bg-clinic-green/5 border border-clinic-green/30 rounded-3xl p-8 md:p-12 grid md:grid-cols-[1.4fr_1fr] gap-8 items-center">
+          <div>
+            <span className="inline-block px-3 py-1 rounded-full bg-clinic-green/15 text-clinic-green font-semibold text-sm mb-4">
+              ¿Estudias en la UGR?
+            </span>
+            <h2 className="text-2xl md:text-3xl font-bold text-clinic-blue mb-3">
+              Hazte mentor/a y acompaña a un estudiante internacional
+            </h2>
+            <p className="text-clinic-blue/70 mb-4">
+              Únete al programa de <strong>parejas lingüísticas</strong>: practica otros idiomas,
+              conoce gente de todo el mundo y ayuda a alguien a vivir Granada. Como mentor/a recibes
+              tu <strong>tarjeta del Seguro Lingüístico y Cultural</strong> con{' '}
+              <strong>20% de descuento en actividades culturales</strong> y acceso a los encuentros
+              de mentores.
+            </p>
+            <Link
+              href="/dashboard/enfermeria-lc"
+              className="inline-block px-7 py-3 bg-clinic-green text-white font-bold rounded-xl hover:bg-clinic-green/90 transition"
+            >
+              Quiero ser mentor/a
+            </Link>
+          </div>
+          <div className="hidden md:flex justify-center text-[120px]">🤝</div>
+        </div>
+      </section>
+
       {/* Banda CTA — Alhambra de noche a sangre */}
       <section className="relative isolate overflow-hidden">
         <img
@@ -198,6 +227,9 @@ export default async function Home() {
           </Link>
         </div>
       </section>
+
+      {/* Entidades colaboradoras */}
+      <Colaboradores />
 
       {/* Footer */}
       <Footer />
