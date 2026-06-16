@@ -46,41 +46,48 @@ export default async function Home() {
         </div>
       </header>
 
-      {/* Hero — dos columnas: mensaje + escena de la clínica */}
-      <section className="max-w-6xl mx-auto px-6 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center animate-fade-in">
-        <div>
-          <span className="inline-block px-4 py-1 rounded-full bg-clinic-green/10 text-clinic-green font-semibold text-sm mb-6">
+      {/* Hero — foto a sangre del patio del CLM (UGR) con tratamiento cálido + titular */}
+      <section className="relative isolate overflow-hidden min-h-[78vh] flex items-end animate-fade-in">
+        {/* Foto base */}
+        <img
+          src="/imgs/backgrounds/hero_clm.jpg"
+          alt="Patio del Centro de Lenguas Modernas de la Universidad de Granada"
+          className="absolute inset-0 -z-20 w-full h-full object-cover [filter:saturate(1.15)_contrast(1.04)]"
+        />
+        {/* Capa cálida (cálido natural) */}
+        <div className="absolute inset-0 -z-10 bg-clinic-gold/15 mix-blend-multiply" />
+        {/* Degradado para legibilidad del titular (oscuro abajo-izquierda) */}
+        <div className="absolute inset-0 -z-10 bg-gradient-to-tr from-clinic-blue/95 via-clinic-blue/45 to-transparent" />
+
+        <div className="relative w-full max-w-6xl mx-auto px-6 py-16 md:py-24 text-white">
+          <span className="inline-block px-4 py-1 rounded-full bg-white/15 backdrop-blur text-clinic-gold font-semibold text-sm mb-6">
             Universidad de Granada · 2026
           </span>
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-clinic-blue leading-tight">
-            ¿Qué es la Clínica Cultural y Lingüística?
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight drop-shadow">
+            Clínica Cultural
+            <span className="block text-2xl md:text-4xl font-bold text-clinic-gold/90 mt-1">
+              y Lingüística de Español
+            </span>
           </h1>
-          <p className="text-lg text-clinic-blue/70 mb-8">
-            No es un curso. Es una experiencia integral que combina el aprendizaje
-            del español con inmersión cultural en Granada, en un entorno clínico y
-            personalizado. <strong className="text-clinic-red">Tu idioma. Tu futuro.</strong>
+          <p className="text-lg md:text-xl text-white/85 max-w-xl mb-8">
+            No es un curso. Es una experiencia integral que combina el español con
+            inmersión cultural en Granada.{' '}
+            <strong className="text-white">Tu idioma. Tu futuro.</strong>
           </p>
           <div className="flex flex-wrap gap-4">
             <Link
               href={user ? '/dashboard' : '/login'}
-              className="inline-block px-8 py-4 bg-clinic-red text-white text-lg font-bold rounded-xl shadow-lg shadow-clinic-red/20 hover:bg-clinic-red/90 transition"
+              className="inline-block px-8 py-4 bg-clinic-red text-white text-lg font-bold rounded-xl shadow-lg shadow-clinic-red/30 hover:bg-clinic-red/90 transition"
             >
               Empezar tu Diagnóstico
             </Link>
             <Link
               href="/sobre-clinica"
-              className="inline-block px-8 py-4 border border-clinic-gray text-clinic-blue text-lg font-semibold rounded-xl hover:bg-clinic-gray/40 transition"
+              className="inline-block px-8 py-4 border border-white/40 text-white text-lg font-semibold rounded-xl hover:bg-white/10 transition"
             >
               Conocer más
             </Link>
           </div>
-        </div>
-        <div className="relative">
-          <img
-            src="/imgs/backgrounds/sala_diagnosis.png"
-            alt="Sala de Diagnóstico de la Clínica Cultural en Granada"
-            className="rounded-3xl shadow-2xl w-full h-auto"
-          />
         </div>
       </section>
 
