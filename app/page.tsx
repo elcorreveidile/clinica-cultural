@@ -46,16 +46,16 @@ export default async function Home() {
         </div>
       </header>
 
-      {/* Hero — foto a sangre del patio del CLM (UGR) con tratamiento cálido + titular */}
+      {/* Hero — foto a sangre del carmen granadino con tratamiento cálido + titular */}
       <section className="relative isolate overflow-hidden min-h-[78vh] flex items-end animate-fade-in">
-        {/* Foto base */}
+        {/* Foto base (ya viene con grado cálido horneado) */}
         <img
-          src="/imgs/backgrounds/hero_clm.jpg"
-          alt="Patio del Centro de Lenguas Modernas de la Universidad de Granada"
-          className="absolute inset-0 -z-20 w-full h-full object-cover [filter:saturate(1.15)_contrast(1.04)]"
+          src="/imgs/backgrounds/hero_carmen.jpg"
+          alt="Carmen granadino: fachada, torre y jardín con naranjos"
+          className="absolute inset-0 -z-20 w-full h-full object-cover"
         />
-        {/* Capa cálida (cálido natural) */}
-        <div className="absolute inset-0 -z-10 bg-clinic-gold/15 mix-blend-multiply" />
+        {/* Toque cálido muy sutil */}
+        <div className="absolute inset-0 -z-10 bg-clinic-gold/5 mix-blend-multiply" />
         {/* Degradado para legibilidad del titular (oscuro abajo-izquierda) */}
         <div className="absolute inset-0 -z-10 bg-gradient-to-tr from-clinic-blue/95 via-clinic-blue/45 to-transparent" />
 
