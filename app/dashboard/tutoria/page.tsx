@@ -234,12 +234,14 @@ export default async function TutoriaPage() {
               Las sesiones con profesorado titulado forman parte del <strong>plan de pago</strong>.
               Mejora tu plan para reservar tutorías personalizadas con un profesor.
             </p>
-            <Link
+            <a
               href="/programa"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-5 py-2.5 border border-clinic-gold text-clinic-gold rounded-lg font-semibold whitespace-nowrap hover:bg-clinic-gold/10"
             >
-              Ver planes
-            </Link>
+              Ver planes ↗
+            </a>
           </div>
         )}
       </div>
