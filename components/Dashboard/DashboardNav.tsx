@@ -16,6 +16,7 @@ const baseItems = [
   { href: '/dashboard/portafolio', label: 'Portafolio', icon: '📂' },
   { href: '/dashboard/seguro-lc', label: 'Seguro LC', icon: '🪪' },
   { href: '/dashboard/emergencia', label: 'Emergencia IA', icon: '🚨' },
+  { href: '/dashboard/settings', label: 'Ajustes', icon: '⚙️' },
 ];
 
 const profesorItem = { href: '/dashboard/profesor', label: 'Panel profesor', icon: '🩺' };
