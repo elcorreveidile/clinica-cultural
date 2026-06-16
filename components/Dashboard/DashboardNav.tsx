@@ -9,6 +9,7 @@ const baseItems = [
   { href: '/dashboard/diagnostico', label: 'Diagnóstico', icon: '🩺' },
   { href: '/dashboard/farmacias', label: 'Farmacias', icon: '💊' },
   { href: '/dashboard/actividades', label: 'Actividades', icon: '📅' },
+  { href: '/dashboard/rutas', label: 'Rutas', icon: '🗺️' },
   { href: '/dashboard/laboratorio-cine', label: 'Laboratorio de cine', icon: '🎬' },
   { href: '/dashboard/escuela-poetas', label: 'Escuela de Poetas', icon: '✍️' },
   { href: '/dashboard/tutoria', label: 'Tutoría', icon: '👥' },
