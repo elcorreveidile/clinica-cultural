@@ -8,6 +8,7 @@ const baseItems = [
   { href: '/dashboard', label: 'Resumen', icon: '🏠' },
   { href: '/dashboard/diagnostico', label: 'Diagnóstico', icon: '🩺' },
   { href: '/dashboard/farmacias', label: 'Farmacias', icon: '💊' },
+  { href: '/dashboard/actividades', label: 'Actividades', icon: '📅' },
   { href: '/dashboard/seguro-lc', label: 'Seguro LC', icon: '🪪' },
   { href: '/dashboard/emergencia', label: 'Emergencia IA', icon: '🚨' },
 ];
