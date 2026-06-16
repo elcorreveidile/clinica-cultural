@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { getSessionUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { displayName } from '@/lib/utils';
+import { displayName, limpiarAnalisis } from '@/lib/utils';
 import ChatMarkdown from '@/components/Chat/ChatMarkdown';
 import DownloadPdfButton from '@/components/DownloadPdfButton';
 
@@ -131,7 +131,7 @@ export default async function InformePage() {
         </h2>
         <div className="text-sm text-clinic-blue/85 mb-8">
           {diagnosis.initialTreatmentPlan ? (
-            <ChatMarkdown content={diagnosis.initialTreatmentPlan} />
+            <ChatMarkdown content={limpiarAnalisis(diagnosis.initialTreatmentPlan)} />
           ) : (
             <p>Sin observaciones.</p>
           )}
