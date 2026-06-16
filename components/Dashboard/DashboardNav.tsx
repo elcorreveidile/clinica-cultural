@@ -18,11 +18,22 @@ const baseItems = [
   { href: '/dashboard/emergencia', label: 'Emergencia IA', icon: '🚨' },
 ];
 
+const profesorItem = { href: '/dashboard/profesor', label: 'Panel profesor', icon: '🩺' };
 const adminItem = { href: '/dashboard/admin', label: 'Administración', icon: '🛡️' };
 
-export default function DashboardNav({ isAdmin = false }: { isAdmin?: boolean }) {
+export default function DashboardNav({
+  isAdmin = false,
+  isProfesor = false,
+}: {
+  isAdmin?: boolean;
+  isProfesor?: boolean;
+}) {
   const pathname = usePathname();
-  const items = isAdmin ? [...baseItems, adminItem] : baseItems;
+  const items = [
+    ...baseItems,
+    ...(isProfesor ? [profesorItem] : []),
+    ...(isAdmin ? [adminItem] : []),
+  ];
 
   return (
     <nav className="bg-white border border-clinic-gray rounded-2xl p-2 flex md:flex-col gap-1 overflow-x-auto">
