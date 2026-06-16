@@ -1,6 +1,8 @@
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { getSessionUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+import { recursosDe } from '@/lib/recursos';
 
 // Evita la prerenderización estática: esta página consulta la base de datos
 // y solo es accesible con sesión iniciada.
@@ -19,10 +21,7 @@ export default async function FarmaciasPage() {
   const user = await getSessionUser();
   if (!user) redirect('/login');
 
-  const farmacias = await prisma.farmacia.findMany({
-    orderBy: { name: 'asc' },
-    include: { _count: { select: { recursos: true } } },
-  });
+  const farmacias = await prisma.farmacia.findMany({ orderBy: { name: 'asc' } });
 
   return (
     <div className="space-y-4 animate-fade-in">
@@ -47,10 +46,12 @@ export default async function FarmaciasPage() {
               label: f.category,
               icon: '💊',
             };
+            const n = recursosDe(f.category).length;
             return (
-              <div
+              <Link
                 key={f.id}
-                className="bg-white border border-clinic-gray rounded-2xl p-6 hover:shadow-md transition"
+                href={`/dashboard/farmacias/${f.id}`}
+                className="block bg-white border border-clinic-gray rounded-2xl p-6 hover:shadow-md hover:border-clinic-red/40 transition"
               >
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-3xl">{cat.icon}</span>
@@ -61,14 +62,12 @@ export default async function FarmaciasPage() {
                   )}
                 </div>
                 <h2 className="font-bold text-clinic-blue">{f.name}</h2>
-                <p className="text-xs text-clinic-gold font-semibold uppercase mb-2">
-                  {cat.label}
-                </p>
+                <p className="text-xs text-clinic-gold font-semibold uppercase mb-2">{cat.label}</p>
                 <p className="text-sm text-clinic-blue/60">{f.description}</p>
                 <p className="text-xs text-clinic-blue/40 mt-4">
-                  {f._count.recursos} recurso(s) disponibles
+                  {n > 0 ? `${n} recurso(s) disponibles →` : 'Próximamente'}
                 </p>
-              </div>
+              </Link>
             );
           })}
         </div>
