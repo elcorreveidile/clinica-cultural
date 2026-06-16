@@ -13,6 +13,14 @@ const MapaRutas = dynamic(() => import('./MapaRutas'), {
   ),
 });
 
-export default function MapaRutasDynamic({ rutas }: { rutas: Ruta[] }) {
-  return <MapaRutas rutas={rutas} />;
+export default function MapaRutasDynamic({
+  rutas,
+  mostrarFiltros = true,
+  zoom = 14,
+}: {
+  rutas: Ruta[];
+  mostrarFiltros?: boolean;
+  zoom?: number;
+}) {
+  return <MapaRutas rutas={rutas} mostrarFiltros={mostrarFiltros} zoom={zoom} />;
 }

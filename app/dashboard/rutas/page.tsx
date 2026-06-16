@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { getSessionUser } from '@/lib/auth';
 import { RUTAS } from '@/lib/rutas';
@@ -23,9 +24,10 @@ export default async function RutasPage() {
       {/* Tarjetas de rutas */}
       <div className="grid md:grid-cols-3 gap-4">
         {RUTAS.map((ruta) => (
-          <div
+          <Link
             key={ruta.slug}
-            className="bg-white border border-clinic-gray rounded-2xl p-6 flex flex-col hover:shadow-md transition"
+            href={`/dashboard/rutas/${ruta.slug}`}
+            className="bg-white border border-clinic-gray rounded-2xl p-6 flex flex-col hover:shadow-md hover:border-clinic-gold/50 transition"
           >
             <div className="w-full h-1.5 rounded-full mb-4" style={{ backgroundColor: ruta.color }} />
             <h2 className="text-lg font-bold text-clinic-blue">{ruta.titulo}</h2>
@@ -40,7 +42,8 @@ export default async function RutasPage() {
                 Nivel {ruta.nivel}
               </span>
             </div>
-          </div>
+            <span className="mt-3 text-clinic-red font-semibold text-sm">Ver ruta y paradas →</span>
+          </Link>
         ))}
       </div>
 

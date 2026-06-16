@@ -23,6 +23,10 @@ export interface Recurso {
   descripcion: string;
   contenido: string; // markdown
   url?: string; // recurso externo opcional
+  // Léxico de la cápsula: palabra/expresión → definición (estilo RAE).
+  // Cada palabra se muestra como una "ficha" con enlace al diccionario de la RAE.
+  // Varios sentidos pueden separarse con " // ".
+  lexico?: Record<string, string>;
 }
 
 export const DOSIS: Record<TipoDosis, { label: string; icon: string }> = {
@@ -166,11 +170,30 @@ El nombre *Alhambra* viene del árabe **al-qal'a al-hamra**, que significa **"el
 
 En **1492**, los **Reyes Católicos** entraron en Granada y el último sultán, **Boabdil**, entregó las llaves de la ciudad. Así terminó casi ocho siglos de presencia musulmana en la península. Años más tarde, el emperador **Carlos V** mandó construir, dentro del recinto, un gran **palacio renacentista** de planta cuadrada y patio circular, que aún hoy contrasta con la delicadeza nazarí.
 
-📌 **Léxico de la cápsula:** *dinastía, reino, sultán, ciudad palatina, fortaleza, muro, conquista, esplendor, atardecer, recinto.*
-
 💬 **Expresión útil:** "remontarse a" → *La historia de la Alhambra se remonta al siglo XIII.*
 
 > 🧠 **Mini‑reto:** Explica en dos frases qué significa "Alhambra" y por qué fue tan importante el año 1492.`,
+      lexico: {
+        dinastía:
+          'Serie de reyes o gobernantes pertenecientes a una misma familia. // Los nazaríes fueron la última dinastía musulmana de la península.',
+        reino:
+          'Territorio gobernado por un rey. // El Reino Nazarí de Granada fue el último reino musulmán de la península ibérica.',
+        sultán:
+          'Rey o soberano de un país musulmán. // Cada sultán nazarí amplió los palacios de la Alhambra.',
+        'ciudad palatina':
+          'Conjunto de palacios y edificios que forman una pequeña ciudad alrededor de la corte del rey. // La Alhambra era una ciudad palatina, no un simple castillo.',
+        fortaleza:
+          'Recinto militar protegido con murallas y torres para defenderse. // La Alcazaba era la fortaleza de la Alhambra.',
+        muro: 'Pared gruesa que sirve de defensa o de cierre. // Los muros de la Alhambra parecen rojos al atardecer.',
+        conquista:
+          'Toma de un territorio por la fuerza de las armas. // La conquista cristiana de Granada terminó en 1492.',
+        esplendor:
+          'Momento de máximo brillo, riqueza o belleza de algo. // El siglo XIV fue el esplendor del reino nazarí.',
+        atardecer:
+          'Última parte de la tarde, cuando se pone el sol. // Al atardecer, los muros de la Alhambra parecen arder.',
+        recinto:
+          'Espacio cerrado o rodeado por una muralla u otro límite. // Dentro del recinto se construyó el palacio de Carlos V.',
+      },
     },
     {
       id: 'alhambra-espacios',
@@ -206,11 +229,29 @@ Era la **almunia**, es decir, la finca de **recreo** y las huertas de los sultan
 
 El más reciente y diferente: un **palacio renacentista** del siglo XVI, de planta cuadrada por fuera y con un sorprendente **patio circular** por dentro. Hoy alberga dos museos.
 
-📌 **Léxico de la cápsula:** *recinto, muralla, torre, sala, patio, alberca, jardín, fuente, mirador, vistas.*
-
 💬 **Expresión útil:** "merecer la pena" → *Subir a la Torre de la Vela merece la pena por las vistas.*
 
 > 🧠 **Mini‑reto:** Si solo tuvieras una hora, ¿qué dos zonas elegirías y por qué?`,
+      lexico: {
+        recinto: 'Espacio cerrado o rodeado por una muralla u otro límite. // La Alhambra es un gran recinto amurallado.',
+        muralla:
+          'Muro grande y fuerte que rodea y protege un lugar. // La Alhambra está rodeada de murallas y torres.',
+        torre:
+          'Construcción alta y estrecha, normalmente de defensa o vigilancia. // La Torre de la Vela ofrece las mejores vistas.',
+        sala: 'Habitación grande de un edificio. // La Sala de los Embajadores era donde recibía el sultán.',
+        patio:
+          'Espacio descubierto en el interior de un edificio. // El Patio de los Leones es el más famoso de la Alhambra.',
+        alberca:
+          'Depósito o estanque de agua, normalmente rectangular. // La alberca del Patio de los Arrayanes refleja la fachada.',
+        jardín:
+          'Terreno donde se cultivan plantas y flores con fines decorativos. // Los jardines del Generalife son famosos en todo el mundo.',
+        fuente:
+          'Construcción que arroja agua con fines decorativos o para beber. // La Fuente de los Leones es la joya del palacio.',
+        mirador:
+          'Lugar alto desde donde se contempla un paisaje. // Desde el mirador de San Nicolás se ve toda la Alhambra.',
+        vistas:
+          'Panorama o paisaje que se ve desde un lugar. // Las vistas desde la Torre de la Vela son espectaculares.',
+      },
     },
     {
       id: 'alhambra-agua',
@@ -242,11 +283,25 @@ La **Fuente de los Leones**, del siglo XIV, era además una pequeña maravilla t
 
 En los jardines del **Generalife**, el **Patio de la Acequia** lleva el juego del agua al extremo: dos hileras de **surtidores** cruzan sus chorros sobre un canal central. Es uno de los rincones más fotografiados del mundo.
 
-📌 **Léxico de la cápsula:** *agua, acequia, alberca, fuente, surtidor, caño, caudal, reflejo, refrescar, regar.*
-
 💬 **Expresión útil:** "estar pensado para" → *Todo el palacio está pensado para disfrutar del agua.*
 
 > 🧠 **Mini‑reto:** Nombra las tres funciones del agua en la Alhambra y pon un ejemplo de cada una.`,
+      lexico: {
+        agua: 'Líquido transparente, incoloro e inodoro, esencial para la vida. // Para la cultura andalusí, el agua simbolizaba el paraíso.',
+        acequia:
+          'Canal pequeño por donde se conduce el agua para regar o abastecer. // La Acequia Real llevaba el agua del Darro hasta la Alhambra.',
+        alberca:
+          'Depósito o estanque de agua, normalmente rectangular. // La alberca del Patio de los Arrayanes funciona como un espejo.',
+        fuente: 'Construcción que arroja agua con fines decorativos o para beber. // La Fuente de los Leones era casi un reloj de agua.',
+        surtidor:
+          'Chorro de agua que sale hacia arriba, normalmente de una fuente. // Los surtidores del Patio de la Acequia cruzan sus chorros.',
+        caño: 'Tubo o conducto por donde sale el agua. // Los caños crean un sonido constante y relajante.',
+        caudal: 'Cantidad de agua que lleva una corriente o un canal. // El caudal del río Darro alimentaba la acequia.',
+        reflejo:
+          'Imagen de algo que se ve en una superficie como el agua o un espejo. // La alberca devuelve el reflejo de la fachada y del cielo.',
+        refrescar: 'Disminuir la temperatura, hacer que algo esté más fresco. // Las fuentes y los patios refrescan el ambiente en verano.',
+        regar: 'Echar agua sobre las plantas o la tierra. // El agua de la acequia servía también para regar las huertas.',
+      },
     },
     {
       id: 'alhambra-arte',
@@ -281,11 +336,24 @@ Mira hacia arriba en la **Sala de los Abencerrajes** o de las **Dos Hermanas**: 
 
 Las tres técnicas comparten un principio: la **repetición** y la **simetría**. Para la cultura andalusí, esos patrones infinitos eran una forma de representar la **perfección** y lo eterno.
 
-📌 **Léxico de la cápsula:** *yeso, yesería, ataurique, azulejo, alicatado, mosaico, bóveda, mocárabe, relieve, motivo, simetría.*
-
 💬 **Expresión útil:** "fijarse en" → *Fíjate en las bóvedas: están llenas de mocárabes.*
 
 > 🧠 **Mini‑reto:** Explica con tus palabras la diferencia entre una **yesería** y un **alicatado**.`,
+      lexico: {
+        yeso: 'Material blanco y blando que, mezclado con agua, sirve para recubrir y decorar muros. // Las yeserías se tallaban en yeso.',
+        yesería: 'Decoración hecha en yeso tallado sobre los muros. // Las yeserías cubren las paredes de motivos finísimos.',
+        ataurique: 'Decoración de tema vegetal estilizado, típica del arte andalusí. // El ataurique imita hojas, tallos y palmas.',
+        azulejo: 'Pieza de cerámica vidriada, normalmente cuadrada y de colores. // Los azulejos cortados a mano forman los alicatados.',
+        alicatado: 'Revestimiento de azulejos que forma figuras geométricas. // Los alicatados cubren la parte baja de los muros.',
+        mosaico: 'Obra hecha con muchas piezas pequeñas de colores unidas. // Los alicatados son un tipo de mosaico.',
+        bóveda: 'Techo curvo que cubre un espacio entre muros o columnas. // Las bóvedas de mocárabes parecen de encaje.',
+        mocárabe:
+          'Adorno formado por muchos prismas que cuelgan como estalactitas. // Los mocárabes difunden la luz de forma mágica.',
+        relieve: 'Figura o adorno que sobresale de una superficie plana. // Las yeserías son relieves tallados en yeso.',
+        motivo: 'Elemento decorativo que se repite en una composición. // El ataurique usa motivos vegetales.',
+        simetría:
+          'Correspondencia exacta entre las partes de una figura respecto a un eje o centro. // El arte nazarí busca la simetría y la repetición.',
+      },
     },
     {
       id: 'alhambra-lema',
@@ -311,11 +379,22 @@ La Alhambra estuvo siglos algo **abandonada**. Su fama mundial actual se debe, e
 
 Gracias a esos cuentos, llenos de princesas, tesoros escondidos y soldados encantados, miles de viajeros empezaron a llegar a Granada. Hoy una placa recuerda las habitaciones donde se alojó el escritor.
 
-📌 **Léxico de la cápsula:** *lema, inscripción, caligrafía, poema, leyenda, cuento, escritor, alojarse, fascinar, abandonado.*
-
 💬 **Expresión útil:** "deberse a" → *La fama de la Alhambra se debe en parte a Washington Irving.*
 
 > 🧠 **Mini‑reto:** ¿Qué quiere decir el lema nazarí y por qué fue importante el libro de Washington Irving?`,
+      lexico: {
+        lema: 'Frase que expresa una idea o un ideal y que sirve de guía. // El lema nazarí era "Solo Dios es vencedor".',
+        inscripción: 'Texto escrito o grabado sobre un muro u otra superficie. // Muchas inscripciones de la Alhambra son poemas.',
+        caligrafía: 'Arte de escribir con letra bella y artística. // La caligrafía árabe decora y, a la vez, comunica.',
+        poema: 'Obra literaria escrita en verso. // En las salas hay poemas que describen el propio palacio.',
+        leyenda:
+          'Relato tradicional con elementos fantásticos o maravillosos. // Los Cuentos de la Alhambra recogen muchas leyendas.',
+        cuento: 'Relato breve de hechos imaginarios. // Washington Irving escribió los Cuentos de la Alhambra.',
+        escritor: 'Persona que escribe obras literarias. // Washington Irving fue un escritor estadounidense.',
+        alojarse: 'Quedarse a vivir temporalmente en un lugar. // El escritor se alojó en las salas de la Alhambra.',
+        fascinar: 'Atraer o gustar mucho, de manera casi irresistible. // La Alhambra fascinó a Washington Irving.',
+        abandonado: 'Dejado solo, sin cuidado ni atención. // La Alhambra estuvo siglos algo abandonada.',
+      },
     },
     {
       id: 'alhambra-visita',
@@ -355,11 +434,23 @@ Las entradas **se agotan** semanas antes, sobre todo en primavera y verano. Reco
 - *"Disculpe, **me he perdido**. ¿Esto es la salida?"*
 - *"¿**Queda muy lejos** la Torre de la Vela?"*
 
-📌 **Léxico de la cápsula:** *entrada, reserva, taquilla, turno, horario, descuento, visita guiada, audioguía, recorrido, salida.*
-
 💬 **Gramática útil:** las preguntas con **se** impersonal → *¿Por dónde **se va**? · ¿**Se puede** entrar?*
 
 > 👉 **Reto oral:** practica estas frases en voz alta con **La Doctora** en la [Línea de Emergencia](/dashboard/emergencia). Pídele que te corrija la pronunciación.`,
+      lexico: {
+        entrada: 'Billete o documento que permite acceder a un lugar. // Compra la entrada con antelación por internet.',
+        reserva: 'Acción de apartar algo para usarlo en un momento concreto. // Tengo una reserva a nombre de…',
+        taquilla: 'Lugar donde se venden las entradas. // En la taquilla a veces piden el DNI.',
+        turno: 'Momento u orden que corresponde a cada persona. // Si te retrasas, pierdes el turno.',
+        horario: 'Distribución de las horas en que algo está abierto o funciona. // Consulta el horario del Generalife antes de ir.',
+        descuento: 'Rebaja que se hace en el precio de algo. // ¿Hay descuento para estudiantes?',
+        'visita guiada':
+          'Recorrido acompañado por un guía que va explicando el lugar. // La visita guiada a la Alhambra dura unas tres horas.',
+        audioguía:
+          'Aparato que ofrece explicaciones grabadas durante la visita. // Puedes alquilar una audioguía en la entrada.',
+        recorrido: 'Trayecto o camino que se sigue para visitar un lugar. // El recorrido por los Palacios Nazaríes es largo.',
+        salida: 'Lugar por donde se sale de un sitio. // Disculpe, ¿esto es la salida?',
+      },
     },
   ],
   conversation: [
