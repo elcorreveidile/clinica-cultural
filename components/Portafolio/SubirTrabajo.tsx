@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { upload } from '@vercel/blob/client';
@@ -13,8 +13,15 @@ const TIPOS = [
   { value: 'project', label: '📦 Proyecto' },
 ];
 
+function formatSize(bytes: number): string {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
 export default function SubirTrabajo() {
   const router = useRouter();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [contentType, setContentType] = useState('writing');
@@ -22,6 +29,7 @@ export default function SubirTrabajo() {
   const [file, setFile] = useState<File | null>(null);
   const [enlace, setEnlace] = useState('');
   const [loading, setLoading] = useState(false);
+  const [progress, setProgress] = useState<number | null>(null);
 
   const reset = () => {
     setTitle('');
@@ -29,6 +37,13 @@ export default function SubirTrabajo() {
     setDescription('');
     setFile(null);
     setEnlace('');
+    setProgress(null);
+    if (fileInputRef.current) fileInputRef.current.value = '';
+  };
+
+  const quitarArchivo = () => {
+    setFile(null);
+    if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
   const submit = async (e: React.FormEvent) => {
@@ -41,10 +56,12 @@ export default function SubirTrabajo() {
     try {
       let fileUrl = enlace.trim();
       if (file) {
+        setProgress(0);
         const safeName = file.name.replace(/[^\w.\-]+/g, '_');
         const blob = await upload(`portafolio/${Date.now()}-${safeName}`, file, {
           access: 'public',
           handleUploadUrl: '/api/portafolio/upload',
+          onUploadProgress: (ev) => setProgress(Math.round(ev.percentage)),
         });
         fileUrl = blob.url;
       }
@@ -65,6 +82,7 @@ export default function SubirTrabajo() {
       toast.error(e instanceof Error ? e.message : 'No se pudo subir el trabajo. Inténtalo de nuevo.');
     } finally {
       setLoading(false);
+      setProgress(null);
     }
   };
 
@@ -82,6 +100,13 @@ export default function SubirTrabajo() {
       </button>
     );
   }
+
+  // Texto del botón según la fase.
+  const botonTexto = !loading
+    ? 'Añadir al portafolio'
+    : file && progress !== null && progress < 100
+    ? `Subiendo archivo… ${progress}%`
+    : 'Guardando…';
 
   return (
     <form onSubmit={submit} className="bg-white border border-clinic-gray rounded-2xl p-6 space-y-4">
@@ -137,12 +162,30 @@ export default function SubirTrabajo() {
         <div>
           <label className={label}>Archivo (opcional)</label>
           <input
+            ref={fileInputRef}
             type="file"
             accept="image/*,application/pdf,audio/*,video/*"
             onChange={(e) => setFile(e.target.files?.[0] ?? null)}
             className="block w-full text-sm text-clinic-blue/70 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-clinic-gray/60 file:text-clinic-blue file:font-semibold hover:file:bg-clinic-gray"
           />
-          <p className="text-xs text-clinic-blue/40 mt-1">Imagen, PDF, audio o vídeo (hasta 200 MB).</p>
+          {file ? (
+            <div className="mt-2 flex items-center justify-between gap-2 bg-clinic-green/5 border border-clinic-green/30 rounded-lg px-3 py-2">
+              <span className="text-sm text-clinic-blue truncate">
+                ✓ {file.name} <span className="text-clinic-blue/50">({formatSize(file.size)})</span>
+              </span>
+              {!loading && (
+                <button
+                  type="button"
+                  onClick={quitarArchivo}
+                  className="text-clinic-blue/40 hover:text-clinic-red text-xs font-semibold shrink-0"
+                >
+                  Quitar
+                </button>
+              )}
+            </div>
+          ) : (
+            <p className="text-xs text-clinic-blue/40 mt-1">Imagen, PDF, audio o vídeo (hasta 200 MB).</p>
+          )}
         </div>
         <div>
           <label className={label}>…o enlace externo</label>
@@ -155,12 +198,27 @@ export default function SubirTrabajo() {
         </div>
       </div>
 
+      {/* Barra de progreso de la subida */}
+      {loading && file && progress !== null && (
+        <div>
+          <div className="h-2 bg-clinic-gray rounded-full overflow-hidden">
+            <div
+              className="h-full bg-clinic-green transition-all"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+          <p className="text-xs text-clinic-blue/50 mt-1">
+            {progress < 100 ? `Subiendo archivo… ${progress}%` : 'Procesando…'}
+          </p>
+        </div>
+      )}
+
       <button
         type="submit"
         disabled={loading}
-        className="w-full py-3 bg-clinic-red text-white font-bold rounded-lg hover:bg-clinic-red/90 disabled:opacity-50 transition"
+        className="w-full py-3 bg-clinic-red text-white font-bold rounded-lg hover:bg-clinic-red/90 disabled:opacity-60 transition"
       >
-        {loading ? 'Subiendo…' : 'Añadir al portafolio'}
+        {botonTexto}
       </button>
     </form>
   );
