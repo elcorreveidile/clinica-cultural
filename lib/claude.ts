@@ -108,7 +108,7 @@ Texto de expresión escrita del paciente:
 
   // Extrae la nota de la primera línea "SCORE: N" y la elimina del texto.
   let writingScore: number | null = null;
-  const m = md.match(/^SCORE:\s*(\d{1,3})/i);
+  const m = md.match(/^SCORE:\s*(\d{1,3})/im);
   if (m) {
     writingScore = Math.min(100, parseInt(m[1], 10));
     md = md.replace(/^SCORE:\s*\d{1,3}.*$/im, '').trim();

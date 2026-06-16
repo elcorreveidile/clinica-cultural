@@ -4,7 +4,7 @@ import { getSessionUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { displayName } from '@/lib/utils';
 import ChatMarkdown from '@/components/Chat/ChatMarkdown';
-import PrintButton from '@/components/PrintButton';
+import DownloadPdfButton from '@/components/DownloadPdfButton';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Informe de diagnóstico lingüístico · Clínica Cultural' };
@@ -58,11 +58,17 @@ export default async function InformePage() {
         <Link href="/dashboard/diagnostico" className="text-clinic-blue/60 hover:text-clinic-blue text-sm">
           ← Volver
         </Link>
-        <PrintButton />
+        <DownloadPdfButton
+          targetId="informe-hoja"
+          filename={`informe-diagnostico-${diagnosis.assessedLevel ?? 'LC'}.pdf`}
+        />
       </div>
 
       {/* Hoja del informe */}
-      <article className="max-w-3xl mx-auto bg-white border border-clinic-gray rounded-xl print:border-0 print:rounded-none shadow-sm print:shadow-none p-8 md:p-10">
+      <article
+        id="informe-hoja"
+        className="max-w-3xl mx-auto bg-white border border-clinic-gray rounded-xl print:border-0 print:rounded-none shadow-sm print:shadow-none p-8 md:p-10"
+      >
         {/* Cabecera tipo analítica clínica */}
         <header className="flex items-start justify-between border-b-2 border-clinic-red pb-4 mb-6">
           <div className="flex items-center gap-3">
