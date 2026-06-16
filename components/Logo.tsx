@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
-/** Marca de la Clínica: símbolo latido→burbuja "C" + wordmark. */
+/** Logo oficial de la Clínica (libro + Alhambra + fonendo + wordmark).
+ *  El propio archivo ya incluye el texto, así que se muestra como imagen única. */
 export default function Logo({
   href = '/',
   className = '',
@@ -9,17 +10,12 @@ export default function Logo({
   className?: string;
 }) {
   return (
-    <Link href={href} className={`flex items-center gap-2 ${className}`}>
+    <Link href={href} className={`inline-flex items-center ${className}`}>
       <img
-        src="/imgs/logos/logo.png"
+        src="/imgs/logos/logo_clinica.png"
         alt="Clínica Cultural y Lingüística"
-        className="h-9 w-9 object-contain"
-        width={36}
-        height={36}
+        className="h-12 md:h-14 w-auto object-contain"
       />
-      <span className="text-xl font-bold text-clinic-red font-heading">
-        Clínica Cultural
-      </span>
     </Link>
   );
 }
