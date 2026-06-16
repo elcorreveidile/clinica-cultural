@@ -121,13 +121,17 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Inmersión cultural */}
+      {/* Inmersión cultural — foto real de la Alhambra (Puerta de la Justicia) */}
       <section className="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
-        <img
-          src="/imgs/backgrounds/tutor.png"
-          alt="Tutoría académica con un local de Granada"
-          className="rounded-3xl shadow-xl w-full h-auto order-2 md:order-1"
-        />
+        <div className="order-2 md:order-1 relative rounded-3xl overflow-hidden shadow-xl">
+          <img
+            src="/imgs/backgrounds/puerta_dia.jpg"
+            alt="Puerta de la Justicia de la Alhambra, Granada"
+            className="w-full h-auto object-cover [filter:saturate(1.12)_contrast(1.05)]"
+          />
+          {/* capa cálida de marca */}
+          <div className="absolute inset-0 bg-clinic-gold/15 mix-blend-multiply" />
+        </div>
         <div className="order-1 md:order-2">
           <h2 className="text-3xl md:text-4xl font-bold text-clinic-blue mb-4">
             Aprende español viviendo Granada
@@ -139,6 +143,32 @@ export default async function Home() {
           <Link
             href="/login"
             className="inline-block px-8 py-4 bg-clinic-green text-white text-lg font-bold rounded-xl hover:bg-clinic-green/90 transition"
+          >
+            Recibir mi Enlace Mágico
+          </Link>
+        </div>
+      </section>
+
+      {/* Banda CTA — Alhambra de noche a sangre */}
+      <section className="relative isolate overflow-hidden">
+        <img
+          src="/imgs/backgrounds/alhambra_noche.jpg"
+          alt="La Alhambra de Granada iluminada de noche bajo la luna"
+          className="absolute inset-0 -z-20 w-full h-full object-cover"
+        />
+        {/* velo cálido para legibilidad */}
+        <div className="absolute inset-0 -z-10 bg-clinic-blue/55" />
+        <div className="relative max-w-3xl mx-auto px-6 py-28 md:py-36 text-center text-white">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 drop-shadow">
+            Tu plaza en la Clínica te espera
+          </h2>
+          <p className="text-lg md:text-xl text-white/85 mb-8">
+            Sin contraseñas. Recibe tu enlace mágico, hazte el diagnóstico y empieza a
+            vivir el español en Granada.
+          </p>
+          <Link
+            href="/login"
+            className="inline-block px-10 py-4 bg-clinic-red text-white text-lg font-bold rounded-xl shadow-lg shadow-clinic-red/30 hover:bg-clinic-red/90 transition"
           >
             Recibir mi Enlace Mágico
           </Link>
