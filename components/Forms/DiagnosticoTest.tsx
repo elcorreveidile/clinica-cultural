@@ -1,8 +1,19 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+
+// Frases clínicas que rotan mientras El Doctor "analiza".
+const FRASES_ESPERA = [
+  'El Doctor está auscultando tu español… 🩺',
+  'Revisando tu radiografía gramatical… 🦴',
+  'Analizando las muestras de expresión escrita… 🔬',
+  'Tomando la tensión a tus tiempos verbales… 💉',
+  'Preparando tu receta lingüística… 💊',
+  'Pasando tu texto por el laboratorio… 🧪',
+  'Redactando el informe clínico… 📋',
+];
 
 interface MCQ {
   q: string;
@@ -74,6 +85,16 @@ export default function DiagnosticoTest() {
 
   const palabras = texto.trim() ? texto.trim().split(/\s+/).filter(Boolean).length : 0;
   const escritaValida = palabras >= 150 && palabras <= 450;
+
+  const [fraseEspera, setFraseEspera] = useState(0);
+  useEffect(() => {
+    if (!submitting) return;
+    const id = setInterval(
+      () => setFraseEspera((n) => (n + 1) % FRASES_ESPERA.length),
+      2200
+    );
+    return () => clearInterval(id);
+  }, [submitting]);
 
   const escuchar = () => {
     if (typeof window === 'undefined' || !window.speechSynthesis) {
@@ -174,9 +195,13 @@ export default function DiagnosticoTest() {
       </div>
 
       {submitting ? (
-        <p className="text-center py-12 text-clinic-blue/60">
-          Analizando tu diagnóstico y corrigiendo tu texto con la IA… (puede tardar unos segundos)
-        </p>
+        <div className="text-center py-14">
+          <div className="text-4xl mb-4 animate-pulse">🩺</div>
+          <p className="text-clinic-blue font-semibold">{FRASES_ESPERA[fraseEspera]}</p>
+          <p className="text-clinic-blue/50 text-sm mt-2">
+            El Doctor está con tu diagnóstico. Esto puede tardar unos segundos…
+          </p>
+        </div>
       ) : (
         <>
           {step === 0 && (
