@@ -53,13 +53,16 @@ export default function SubirTrabajo() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title, contentType, description, fileUrl }),
       });
-      if (!res.ok) throw new Error();
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'No se pudo guardar el trabajo.');
+      }
       toast.success('Trabajo añadido a tu portafolio.');
       reset();
       setOpen(false);
       router.refresh();
-    } catch {
-      toast.error('No se pudo subir el trabajo. Inténtalo de nuevo.');
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : 'No se pudo subir el trabajo. Inténtalo de nuevo.');
     } finally {
       setLoading(false);
     }

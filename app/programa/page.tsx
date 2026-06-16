@@ -2,7 +2,10 @@ import Link from 'next/link';
 import Logo from '@/components/Logo';
 import Footer from '@/components/Footer';
 import MatriculaButton from '@/components/MatriculaButton';
+import { getSessionUser } from '@/lib/auth';
 import type { PlanId } from '@/lib/stripe';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata = {
   title: 'Programa y precios · Clínica Cultural',

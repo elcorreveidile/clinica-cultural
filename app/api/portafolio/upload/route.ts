@@ -6,6 +6,13 @@ import { getSessionUser } from '@/lib/auth';
 // navegador a Vercel Blob (evita el límite de 4,5 MB de las funciones
 // serverless, así que admite audio y vídeo).
 export async function POST(request: NextRequest): Promise<NextResponse> {
+  if (!process.env.BLOB_READ_WRITE_TOKEN) {
+    return NextResponse.json(
+      { error: 'El almacenamiento de archivos no está configurado en este entorno (falta BLOB_READ_WRITE_TOKEN).' },
+      { status: 500 }
+    );
+  }
+
   const body = (await request.json()) as HandleUploadBody;
 
   try {

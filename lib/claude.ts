@@ -121,3 +121,45 @@ Texto de expresión escrita del paciente:
 
   return { writingScore, analisisMarkdown: md || 'No se pudo generar el análisis.' };
 }
+
+/**
+ * Feedback poético de La Doctora para la Escuela de Poetas. Comenta el poema
+ * del estudiante de forma cálida y constructiva. Devuelve markdown.
+ */
+export async function feedbackPoetico(input: {
+  texto: string;
+  nivel: string;
+  reto?: string;
+}): Promise<string> {
+  if (!anthropic) {
+    return `## Feedback (modo demo)\nConfigura \`CLAUDE_API_KEY\` para recibir el comentario poético de La Doctora. ¡Buen comienzo! Cuida el **ritmo** y las **imágenes**, y juega con los cinco sentidos.`;
+  }
+
+  const sys = `Eres "La Doctora" de la Clínica Cultural y Lingüística de Español (UGR), en su taller "Escuela de Poetas". Das feedback POÉTICO a un estudiante de español, cálido, alentador y útil.
+
+Responde en español, en MARKDOWN, breve (no más de unas 180 palabras), con estas partes:
+## 🌟 Lo que más me gusta
+Destaca 1-2 aciertos concretos (una imagen, un sonido, una palabra bien elegida).
+## 🎵 Ritmo y sonido
+Un comentario breve sobre la musicalidad o la medida.
+## 🪄 Una sugerencia
+UNA propuesta concreta de mejora (puedes ofrecer un verso alternativo como ejemplo, sin reescribir todo el poema).
+
+Adapta el tono al nivel ${input.nivel}. Sé respetuoso con la voz del autor: anima, no reescribas su poema entero. No corrijas como un examen; es un taller creativo.`;
+
+  const userMsg = `Nivel del estudiante: ${input.nivel}.${
+    input.reto ? ` Reto propuesto: ${input.reto}.` : ''
+  }
+Poema del estudiante:
+"""${input.texto}"""`;
+
+  const response = await anthropic.messages.create({
+    model: MODEL,
+    max_tokens: 700,
+    system: sys,
+    messages: [{ role: 'user', content: userMsg }],
+  });
+
+  const block = response.content[0];
+  return block && block.type === 'text' ? block.text.trim() : 'No se pudo generar el feedback.';
+}
