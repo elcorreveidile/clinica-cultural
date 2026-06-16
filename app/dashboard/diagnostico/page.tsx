@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import { getSessionUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import DiagnosticoTest from '@/components/Forms/DiagnosticoTest';
+import ChatMarkdown from '@/components/Chat/ChatMarkdown';
 
 export default async function DiagnosticoPage({
   searchParams,
@@ -38,11 +39,12 @@ export default async function DiagnosticoPage({
             <div className="text-6xl font-bold text-clinic-red my-3">{user.currentLevel}</div>
 
             {/* Subnotas por sección */}
-            <div className="grid grid-cols-3 gap-3 mt-4">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
               {[
                 { label: 'Gramática', value: diagnosis.grammarScore },
                 { label: 'Auditiva', value: diagnosis.listeningComprehensionScore },
                 { label: 'Lectora', value: diagnosis.readingComprehensionScore },
+                { label: 'Escrita (IA)', value: diagnosis.writtenExpressionScore },
               ].map((s) => (
                 <div key={s.label} className="bg-clinic-gray/30 rounded-xl p-4 text-center">
                   <div className="text-2xl font-bold text-clinic-blue">
@@ -53,12 +55,6 @@ export default async function DiagnosticoPage({
                 </div>
               ))}
             </div>
-
-            {diagnosis.initialTreatmentPlan && (
-              <p className="mt-4 p-4 bg-clinic-green/5 border border-clinic-green/20 rounded-xl text-clinic-blue/80">
-                {diagnosis.initialTreatmentPlan}
-              </p>
-            )}
 
             <div className="mt-6 flex flex-wrap gap-3">
               <Link
@@ -81,6 +77,27 @@ export default async function DiagnosticoPage({
               </Link>
             </div>
           </div>
+
+          {/* Análisis lingüístico generado por la IA */}
+          {diagnosis.initialTreatmentPlan && (
+            <div className="bg-white border border-clinic-gray rounded-2xl p-6 md:p-8">
+              <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
+                <h2 className="text-xl font-bold text-clinic-blue flex items-center gap-2">
+                  🧪 Tu análisis lingüístico
+                </h2>
+                <Link
+                  href="/informe"
+                  target="_blank"
+                  className="px-4 py-2 bg-clinic-red text-white rounded-lg text-sm font-semibold hover:bg-clinic-red/90"
+                >
+                  📄 Descargar informe (PDF)
+                </Link>
+              </div>
+              <div className="text-clinic-blue/85">
+                <ChatMarkdown content={diagnosis.initialTreatmentPlan} />
+              </div>
+            </div>
+          )}
 
           {/* Siguiente paso: evaluación oral con docente */}
           <div className="bg-clinic-gold/10 border border-clinic-gold/30 rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">

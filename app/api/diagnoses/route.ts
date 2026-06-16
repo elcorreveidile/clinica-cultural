@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { getSessionUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+import { analizarDiagnostico } from '@/lib/claude';
 
 const LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'] as const;
 
@@ -46,6 +47,23 @@ export async function POST(request: NextRequest) {
 
   const palabras = escrita.texto.trim().split(/\s+/).filter(Boolean).length;
 
+  // La IA corrige la expresión escrita y genera la analítica por destrezas.
+  let writingScore: number | null = null;
+  let analisis = '';
+  try {
+    const r = await analizarDiagnostico({
+      texto: escrita.texto.trim(),
+      nivel: level,
+      grammar: grammarScore,
+      listening: listeningScore,
+      reading: readingScore,
+    });
+    writingScore = r.writingScore;
+    analisis = r.analisisMarkdown;
+  } catch (e) {
+    console.error('análisis diagnóstico error:', e);
+  }
+
   await prisma.$transaction([
     prisma.diagnosis.create({
       data: {
@@ -53,15 +71,17 @@ export async function POST(request: NextRequest) {
         grammarScore,
         listeningComprehensionScore: listeningScore,
         readingComprehensionScore: readingScore,
-        writtenExpressionScore: null, // se valora junto a la sesión oral
+        writtenExpressionScore: writingScore,
         assessedLevel: level,
-        interviewNotes: `Expresión escrita del paciente (${palabras} palabras):\n${escrita.texto.trim()}\n\n(Nivel oral y expresión escrita pendientes de evaluación por un docente.)`,
-        initialTreatmentPlan: `Nivel orientativo ${level}. Farmacias recomendadas según diagnóstico. Pendiente: sesión oral con docente.`,
+        interviewNotes: `Texto de expresión escrita del paciente (${palabras} palabras):\n${escrita.texto.trim()}`,
+        initialTreatmentPlan:
+          analisis ||
+          `Nivel orientativo ${level}. Farmacias recomendadas según diagnóstico. Pendiente: sesión oral con docente.`,
         completedAt: new Date(),
       },
     }),
     prisma.user.update({ where: { id: user.id }, data: { currentLevel: level } }),
   ]);
 
-  return NextResponse.json({ level, grammarScore, listeningScore, readingScore });
+  return NextResponse.json({ level, grammarScore, listeningScore, readingScore, writingScore });
 }

@@ -57,3 +57,61 @@ export async function askClaudeLinguistic(
   }
   throw new Error('Respuesta inesperada de Claude');
 }
+
+/**
+ * Analiza el diagnóstico: corrige la expresión escrita y genera una analítica
+ * por destrezas. Devuelve una nota de escritura (0-100) y el análisis en markdown.
+ */
+export async function analizarDiagnostico(input: {
+  texto: string;
+  nivel: string;
+  grammar: number;
+  listening: number;
+  reading: number;
+}): Promise<{ writingScore: number | null; analisisMarkdown: string }> {
+  if (!anthropic) {
+    return {
+      writingScore: null,
+      analisisMarkdown: `## Análisis (modo demo)\nConfigura \`CLAUDE_API_KEY\` para recibir la corrección de tu texto y el análisis por destrezas. Nivel orientativo: **${input.nivel}**.`,
+    };
+  }
+
+  const sys = `Eres "El Doctor" de la Clínica Cultural y Lingüística de Español (UGR). Analizas el diagnóstico de un paciente.
+Responde EXCLUSIVAMENTE con un JSON válido (sin texto fuera del JSON) con esta forma exacta:
+{"writingScore": <entero 0-100>, "writingLevel": "<A1|A2|B1|B2|C1|C2>", "analisis": "<markdown en español>"}
+
+El campo "analisis" (markdown, en español, cálido y conciso) debe incluir:
+## ✍️ Corrección de tu expresión escrita
+Lista los errores reales del texto, uno por línea con el formato: ❌ "fragmento" → ✅ "corrección" — explicación breve. Si no hay errores relevantes, felicítale.
+Incluye también una versión mejorada del texto.
+## 📊 Tu nivel por destrezas
+Comenta brevemente: Gramática (${input.grammar}%), Comprensión auditiva (${input.listening}%), Comprensión lectora (${input.reading}%) y Expresión escrita, con fortalezas y áreas de mejora.
+## 💊 Recomendaciones
+Qué trabajar y a dónde ir, enlazando en markdown: [Farmacias](/dashboard/farmacias), [Actividades](/dashboard/actividades) y [El Doctor](/dashboard/emergencia).`;
+
+  const userMsg = `Nivel orientativo: ${input.nivel}. Gramática ${input.grammar}%, Auditiva ${input.listening}%, Lectora ${input.reading}%.
+Texto de expresión escrita del paciente:
+"""${input.texto}"""`;
+
+  const response = await anthropic.messages.create({
+    model: MODEL,
+    max_tokens: 1800,
+    system: sys,
+    messages: [{ role: 'user', content: userMsg }],
+  });
+
+  const block = response.content[0];
+  const raw = block && block.type === 'text' ? block.text : '';
+
+  try {
+    const match = raw.match(/\{[\s\S]*\}/);
+    const json = JSON.parse(match ? match[0] : raw);
+    return {
+      writingScore:
+        typeof json.writingScore === 'number' ? Math.round(json.writingScore) : null,
+      analisisMarkdown: String(json.analisis ?? raw),
+    };
+  } catch {
+    return { writingScore: null, analisisMarkdown: raw || 'No se pudo generar el análisis.' };
+  }
+}

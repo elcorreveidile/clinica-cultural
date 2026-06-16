@@ -13,36 +13,50 @@ interface MCQ {
 // ── Contenido del diagnóstico ────────────────────────────────────────────────
 const GRAMATICA: MCQ[] = [
   { q: '¿Cómo ___ llamas?', options: ['te', 'se', 'me', 'le'], answer: 0 },
+  { q: 'Yo ___ estudiante de español.', options: ['soy', 'estoy', 'tengo', 'hay'], answer: 0 },
+  { q: 'Hay ___ libros en la mesa.', options: ['mucho', 'muchos', 'mucha', 'muchas'], answer: 1 },
+  { q: 'Mi hermana ___ veintidós años.', options: ['es', 'está', 'tiene', 'hace'], answer: 2 },
   { q: 'Ayer ___ al cine con mis amigos.', options: ['voy', 'fui', 'iré', 'iba'], answer: 1 },
+  { q: 'Esta mañana ___ café antes de salir.', options: ['tomo', 'tomé', 'tomaba', 'he tomado'], answer: 3 },
+  { q: 'Cuando era niño, ___ todos los veranos a la playa.', options: ['fui', 'iba', 'iré', 'he ido'], answer: 1 },
   { q: 'Quiero que tú ___ más despacio.', options: ['hablas', 'hablar', 'hables', 'hablabas'], answer: 2 },
-  { q: 'Si ___ dinero, viajaría por el mundo.', options: ['tengo', 'tuviera', 'tendré', 'tenía'], answer: 1 },
-  { q: 'El libro ___ que te hablé es muy bueno.', options: ['que', 'del', 'cuyo', 'del que'], answer: 3 },
+  { q: 'Me gusta esta casa, pero ___ es muy cara.', options: ['ese', 'eso', 'esa', 'esta'], answer: 2 },
   { q: 'No creo que ___ verdad.', options: ['es', 'sea', 'será', 'era'], answer: 1 },
   { q: 'Cuando ___ a casa, llámame.', options: ['llegas', 'llegues', 'llegarás', 'llegaste'], answer: 1 },
+  { q: 'Si ___ dinero, viajaría por el mundo.', options: ['tengo', 'tuviera', 'tendré', 'tenía'], answer: 1 },
+  { q: 'El libro ___ que te hablé es muy bueno.', options: ['que', 'del', 'cuyo', 'del que'], answer: 3 },
   { q: '___ terminado el trabajo antes de las cinco.', options: ['He', 'Había', 'Habré', 'Haya'], answer: 2 },
   { q: 'Me molesta que la gente ___ tarde.', options: ['llega', 'llegue', 'llegará', 'llegaba'], answer: 1 },
+  { q: 'Te lo dije para que lo ___ en cuenta.', options: ['tienes', 'tengas', 'tuvieras', 'tendrás'], answer: 2 },
+  { q: 'Por mucho que ___, no lo conseguirás.', options: ['intentas', 'intentes', 'intentarás', 'intentabas'], answer: 1 },
   { q: 'De haberlo sabido, no ___ venido.', options: ['habría', 'había', 'haya', 'hubiera'], answer: 0 },
+  { q: 'Es la persona ___ más confío.', options: ['que', 'en quien', 'cual', 'cuya'], answer: 1 },
+  { q: 'Como si ___ algo de lo que pasó…', options: ['sabe', 'supiera', 'sabrá', 'sabía'], answer: 1 },
 ];
 
 const AUDITIVA = {
   texto:
-    'Hola, me llamo Lucía y vivo en Granada desde hace tres años. Trabajo por las mañanas en una librería del centro y por las tardes estudio italiano. Los fines de semana me gusta pasear por el Albaicín y tomar algo con mis amigos en una terraza con vistas a la Alhambra.',
+    'Hola, me llamo Lucía y vivo en Granada desde hace tres años. Soy de Argentina, pero vine a España para hacer un máster en Historia del Arte. Al principio me costó bastante adaptarme: el acento andaluz era muy rápido para mí y no entendía casi nada en los bares. Poco a poco, sin embargo, fui acostumbrándome y ahora me defiendo sin problemas. Trabajo por las mañanas en una librería del centro y por las tardes estudio italiano en el Centro de Lenguas Modernas. Los fines de semana suelo pasear por el Albaicín, y si hace buen tiempo, subo al mirador de San Nicolás para ver la Alhambra al atardecer. Lo que más me gusta de la ciudad es que, aunque es pequeña, siempre hay algo cultural que hacer.',
   preguntas: [
-    { q: '¿Cuánto tiempo hace que Lucía vive en Granada?', options: ['Un año', 'Tres años', 'Cinco años', 'Toda la vida'], answer: 1 },
-    { q: '¿Dónde trabaja Lucía?', options: ['En un bar', 'En una escuela', 'En una librería', 'En un hotel'], answer: 2 },
-    { q: '¿Qué estudia por las tardes?', options: ['Inglés', 'Italiano', 'Francés', 'Alemán'], answer: 1 },
-    { q: '¿Qué hace los fines de semana?', options: ['Trabaja más', 'Pasea por el Albaicín', 'Viaja a Madrid', 'Estudia en casa'], answer: 1 },
+    { q: '¿De dónde es Lucía?', options: ['De España', 'De Argentina', 'De Italia', 'De México'], answer: 1 },
+    { q: '¿Por qué vino a Granada?', options: ['Por trabajo', 'Para hacer un máster', 'De vacaciones', 'Por su familia'], answer: 1 },
+    { q: '¿Qué le costó al principio?', options: ['Encontrar piso', 'Entender el acento andaluz', 'Hacer amigos', 'El clima'], answer: 1 },
+    { q: '¿Dónde estudia italiano?', options: ['En la universidad', 'En casa', 'En el Centro de Lenguas Modernas', 'En una academia privada'], answer: 2 },
+    { q: '¿Qué hace si hace buen tiempo el fin de semana?', options: ['Se queda en casa', 'Sube al mirador de San Nicolás', 'Va a la playa', 'Trabaja más'], answer: 1 },
+    { q: '¿Qué es lo que más le gusta de Granada?', options: ['Que es muy grande', 'Que siempre hay algo cultural', 'Que es barata', 'Que hace calor'], answer: 1 },
   ] as MCQ[],
 };
 
 const LECTORA = {
   texto:
-    'La tradición de las tapas en Granada es muy especial: en la mayoría de los bares, cuando pides una bebida, te sirven gratis una pequeña ración de comida. Esta costumbre, cada vez menos frecuente en otras ciudades españolas, convierte el "tapeo" en una forma económica y social de cenar. Muchos estudiantes internacionales descubren así platos típicos sin gastar mucho dinero.',
+    'La tradición de las tapas en Granada es una de las más queridas por quienes visitan la ciudad. A diferencia de lo que ocurre en buena parte de España, aquí mantiene una característica que la hace única: en la mayoría de los bares, cuando pides una bebida, te sirven gratis una pequeña ración de comida que no eliges tú, sino que decide el camarero. Así, una simple caña puede venir acompañada de una tostada de jamón, un plato de migas o una porción de tortilla.\n\nEsta costumbre, cada vez menos frecuente en otras ciudades españolas, convierte el llamado "tapeo" en una forma económica y profundamente social de cenar: la gente se mueve de bar en bar, comparte mesa con desconocidos y alarga la noche sin gastar apenas dinero. Para muchos estudiantes internacionales, recorrer las tapas no solo es una manera barata de comer, sino también una de las mejores formas de practicar español en situaciones reales y de integrarse en la vida cotidiana granadina. No es de extrañar, por tanto, que el tapeo se haya convertido en todo un símbolo de la identidad de la ciudad.',
   preguntas: [
-    { q: 'Según el texto, en Granada la tapa con la bebida suele ser…', options: ['carísima', 'gratis', 'obligatoria pagarla', 'solo de postre'], answer: 1 },
-    { q: 'Esta costumbre, en otras ciudades, es…', options: ['más frecuente', 'igual de común', 'cada vez menos frecuente', 'desconocida'], answer: 2 },
+    { q: 'En Granada, la tapa que acompaña a la bebida…', options: ['la eliges tú', 'la decide el camarero', 'se paga aparte', 'es siempre dulce'], answer: 1 },
+    { q: 'Según el texto, esta costumbre en otras ciudades es…', options: ['más frecuente', 'igual de común', 'cada vez menos frecuente', 'totalmente desconocida'], answer: 2 },
     { q: 'El "tapeo" se describe como una forma de cenar…', options: ['cara y formal', 'económica y social', 'rápida y solitaria', 'solo para turistas'], answer: 1 },
-    { q: '¿Quiénes descubren platos típicos sin gastar mucho?', options: ['Los cocineros', 'Los estudiantes internacionales', 'Los camareros', 'Los políticos'], answer: 1 },
+    { q: '¿Qué suele hacer la gente durante el tapeo?', options: ['Quedarse en un solo bar', 'Moverse de bar en bar', 'Cenar en casa', 'Comer en silencio'], answer: 1 },
+    { q: 'Para los estudiantes internacionales, el tapeo es además una forma de…', options: ['ahorrar para viajar', 'practicar español e integrarse', 'aprender a cocinar', 'conocer a profesores'], answer: 1 },
+    { q: 'La idea principal del texto es que el tapeo…', options: ['está desapareciendo en Granada', 'es un símbolo de la identidad de la ciudad', 'solo gusta a los turistas', 'es muy caro'], answer: 1 },
   ] as MCQ[],
 };
 
@@ -58,6 +72,9 @@ export default function DiagnosticoTest() {
   const [escuchas, setEscuchas] = useState(0);
   const [submitting, setSubmitting] = useState(false);
 
+  const palabras = texto.trim() ? texto.trim().split(/\s+/).filter(Boolean).length : 0;
+  const escritaValida = palabras >= 150 && palabras <= 450;
+
   const escuchar = () => {
     if (typeof window === 'undefined' || !window.speechSynthesis) {
       toast.error('Tu navegador no admite audio. Usa Chrome/Edge.');
@@ -69,7 +86,7 @@ export default function DiagnosticoTest() {
     }
     const u = new SpeechSynthesisUtterance(AUDITIVA.texto);
     u.lang = 'es-ES';
-    u.rate = 0.95;
+    u.rate = 0.85; // velocidad natural-pausada
     window.speechSynthesis.cancel();
     window.speechSynthesis.speak(u);
     setEscuchas((n) => n + 1);
@@ -157,7 +174,9 @@ export default function DiagnosticoTest() {
       </div>
 
       {submitting ? (
-        <p className="text-center py-12 text-clinic-blue/60">Calculando tu diagnóstico…</p>
+        <p className="text-center py-12 text-clinic-blue/60">
+          Analizando tu diagnóstico y corrigiendo tu texto con la IA… (puede tardar unos segundos)
+        </p>
       ) : (
         <>
           {step === 0 && (
@@ -212,18 +231,25 @@ export default function DiagnosticoTest() {
             <>
               <h2 className="text-xl font-bold text-clinic-blue mb-1">Expresión escrita</h2>
               <p className="text-clinic-blue/60 text-sm mb-4">
-                Escribe un texto (4-6 frases): preséntate y cuenta por qué quieres aprender español
-                en Granada. Lo revisará un docente junto a tu evaluación oral.
+                Escribe un texto de <strong>150–450 palabras</strong>: preséntate, cuenta por qué
+                quieres aprender español en Granada y describe tus objetivos. La inteligencia
+                artificial corregirá tu texto y te dará un análisis con tus errores.
               </p>
               <textarea
                 value={texto}
                 onChange={(e) => setTexto(e.target.value)}
-                rows={7}
-                placeholder="Escribe aquí tu texto…"
+                rows={10}
+                placeholder="Escribe aquí tu texto (mínimo 150 palabras)…"
                 className="w-full px-4 py-3 border border-clinic-gray rounded-xl focus:outline-none focus:ring-2 focus:ring-clinic-red/40"
               />
-              <p className="text-xs text-clinic-blue/40 mt-1">
-                {texto.trim().split(/\s+/).filter(Boolean).length} palabras
+              <p
+                className={`text-xs mt-1 ${
+                  palabras < 150 || palabras > 450 ? 'text-clinic-red' : 'text-clinic-green'
+                }`}
+              >
+                {palabras} / 450 palabras
+                {palabras < 150 && ` · te faltan ${150 - palabras} para el mínimo`}
+                {palabras > 450 && ' · te has pasado del máximo'}
               </p>
             </>
           )}
@@ -250,7 +276,7 @@ export default function DiagnosticoTest() {
               <button
                 type="button"
                 onClick={finalizar}
-                disabled={texto.trim().length < 10}
+                disabled={!escritaValida}
                 className="px-6 py-2.5 bg-clinic-green text-white rounded-lg font-bold hover:bg-clinic-green/90 disabled:opacity-50"
               >
                 Finalizar diagnóstico
