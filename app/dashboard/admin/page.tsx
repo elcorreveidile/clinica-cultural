@@ -1,15 +1,10 @@
 import { redirect } from 'next/navigation';
 import { getSessionUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+import RolSelect from '@/components/Admin/RolSelect';
+import AltaUsuarioForm from '@/components/Admin/AltaUsuarioForm';
 
 export const dynamic = 'force-dynamic';
-
-const ROLE_BADGE: Record<string, string> = {
-  admin: 'bg-clinic-red/10 text-clinic-red',
-  professor: 'bg-clinic-blue/10 text-clinic-blue',
-  tutor_local: 'bg-clinic-gold/15 text-clinic-gold',
-  patient: 'bg-clinic-green/10 text-clinic-green',
-};
 
 export default async function AdminPage() {
   const user = await getSessionUser();
@@ -71,6 +66,9 @@ export default async function AdminPage() {
         ))}
       </div>
 
+      {/* Alta de profesores / gestión de roles */}
+      <AltaUsuarioForm />
+
       {/* Usuarios */}
       <div className="bg-white border border-clinic-gray rounded-2xl overflow-hidden">
         <div className="px-6 py-4 border-b border-clinic-gray flex items-center justify-between">
@@ -96,11 +94,7 @@ export default async function AdminPage() {
                   <td className="px-6 py-3 text-clinic-blue font-medium">{u.email}</td>
                   <td className="px-6 py-3 text-clinic-blue/70">{u.fullName ?? '—'}</td>
                   <td className="px-6 py-3">
-                    <span
-                      className={`px-2 py-1 rounded-full text-xs font-semibold ${ROLE_BADGE[u.role] ?? 'bg-clinic-gray text-clinic-blue'}`}
-                    >
-                      {u.role}
-                    </span>
+                    <RolSelect userId={u.id} rol={u.role} disabled={u.id === user.id} />
                   </td>
                   <td className="px-6 py-3 text-clinic-blue/70">{u.currentLevel ?? '—'}</td>
                   <td className="px-6 py-3 text-clinic-blue/50">
