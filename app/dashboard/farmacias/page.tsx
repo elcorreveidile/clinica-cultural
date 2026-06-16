@@ -1,4 +1,10 @@
+import { redirect } from 'next/navigation';
+import { getSessionUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+
+// Evita la prerenderización estática: esta página consulta la base de datos
+// y solo es accesible con sesión iniciada.
+export const dynamic = 'force-dynamic';
 
 const CATEGORY_LABELS: Record<string, { label: string; icon: string }> = {
   grammar: { label: 'Gramática', icon: '💊' },
@@ -10,6 +16,9 @@ const CATEGORY_LABELS: Record<string, { label: string; icon: string }> = {
 };
 
 export default async function FarmaciasPage() {
+  const user = await getSessionUser();
+  if (!user) redirect('/login');
+
   const farmacias = await prisma.farmacia.findMany({
     orderBy: { name: 'asc' },
     include: { _count: { select: { recursos: true } } },
