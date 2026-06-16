@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Logo from '@/components/Logo';
+import Footer from '@/components/Footer';
 
 export default function SobreClinicaPage() {
   const features: [string, string][] = [
@@ -79,12 +80,7 @@ export default function SobreClinicaPage() {
       </article>
 
       {/* Footer */}
-      <footer className="bg-clinic-blue text-white py-12">
-        <div className="max-w-6xl mx-auto px-6 text-center space-y-2">
-          <p className="font-heading text-lg">Clínica Cultural y Lingüística de Español</p>
-          <p className="text-white/60 text-sm">Universidad de Granada · 2026</p>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }

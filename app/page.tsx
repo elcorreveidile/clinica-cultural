@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getSessionUser } from '@/lib/auth';
 import Logo from '@/components/Logo';
+import Footer from '@/components/Footer';
 
 const features = [
   {
@@ -196,17 +197,7 @@ export default async function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-clinic-blue text-white py-12">
-        <div className="max-w-6xl mx-auto px-6 text-center space-y-3">
-          <img
-            src="/imgs/logos/logo.png"
-            alt="Clínica Cultural"
-            className="h-12 w-12 mx-auto object-contain"
-          />
-          <p className="font-heading text-lg">Clínica Cultural y Lingüística de Español</p>
-          <p className="text-white/60 text-sm">Universidad de Granada · 2026</p>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }
