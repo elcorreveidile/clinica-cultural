@@ -36,7 +36,10 @@ export default async function DashboardLayout({
 
       <div className="max-w-6xl mx-auto px-4 md:px-8 py-6 flex flex-col md:flex-row gap-6">
         <aside className="md:w-60 shrink-0">
-          <DashboardNav isAdmin={user.role === 'admin'} />
+          <DashboardNav
+            isAdmin={user.role === 'admin'}
+            isProfesor={['professor', 'tutor_local', 'admin'].includes(user.role)}
+          />
         </aside>
         <main className="flex-1 min-w-0">{children}</main>
       </div>
