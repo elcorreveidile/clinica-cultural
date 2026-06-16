@@ -8,6 +8,7 @@ import {
   SEGURO_LC_DESCUENTO,
   precioConDescuento,
 } from '@/lib/actividades';
+import ReservaButton from '@/components/Dashboard/ReservaButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -15,8 +16,15 @@ export default async function ActividadesPage() {
   const user = await getSessionUser();
   if (!user) redirect('/login');
 
-  const seguro = await prisma.seguroLC.findUnique({ where: { userId: user.id } });
+  const [seguro, reservas] = await Promise.all([
+    prisma.seguroLC.findUnique({ where: { userId: user.id } }),
+    prisma.reserva.findMany({
+      where: { userId: user.id, estado: 'confirmada' },
+      select: { actividadId: true },
+    }),
+  ]);
   const tieneDescuento = seguro?.cardStatus === 'active';
+  const reservadas = new Set(reservas.map((r) => r.actividadId));
 
   return (
     <div className="space-y-6 animate-fade-in">
@@ -95,6 +103,8 @@ export default async function ActividadesPage() {
                   )}
                 </span>
               </div>
+
+              <ReservaButton actividadId={a.id} reservada={reservadas.has(a.id)} />
             </div>
           );
         })}

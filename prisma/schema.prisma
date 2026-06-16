@@ -125,8 +125,29 @@ model User {
   chatMessages    ChatLineaEmergencia[]
   tutorSessions   SesionTutoria[]       @relation("TutorSessions")
   patientSessions SesionTutoria[]       @relation("PatientSessions")
+  reservas        Reserva[]
 
   @@map("users")
+}
+
+enum ReservaEstado {
+  confirmada
+  cancelada
+}
+
+/// Reserva de una actividad del catálogo (el catálogo es estático: lib/actividades.ts).
+model Reserva {
+  id          String        @id @default(uuid()) @db.Uuid
+  userId      String        @map("user_id") @db.Uuid
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  actividadId String        @map("actividad_id")
+  estado      ReservaEstado @default(confirmada)
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt @map("updated_at")
+
+  @@unique([userId, actividadId])
+  @@index([userId])
+  @@map("reservas")
 }
 
 model MagicLinkToken {
