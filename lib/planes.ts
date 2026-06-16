@@ -13,3 +13,19 @@ export function tienePlanProfesor(user: { role: string; email: string }): boolea
     .filter(Boolean);
   return lista.includes(user.email.toLowerCase());
 }
+
+// Acceso completo a la clínica (sin límites de "visitante"). De momento lo
+// tienen el equipo (admin/profesor/mentor) y los emails premium.
+// TODO (pagos): incluir aquí la suscripción activa (mensual/curso) y el bono
+// semanal del plan a demanda.
+export function tieneAccesoCompleto(user: { role: string; email: string }): boolean {
+  if (['admin', 'professor', 'tutor_local'].includes(user.role)) return true;
+  const lista = (process.env.PREMIUM_EMAILS || '')
+    .split(',')
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean);
+  return lista.includes(user.email.toLowerCase());
+}
+
+// Nº de consultas gratuitas con La Doctora para un visitante.
+export const LIMITE_CONSULTAS_VISITANTE = 3;

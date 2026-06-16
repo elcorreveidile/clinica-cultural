@@ -62,9 +62,11 @@ const planes: {
     periodo: '/ mes',
     desc: 'Matrícula flexible, mes a mes.',
     features: [
-      'Acceso a todas las clínicas del mes',
-      'Actividades culturales del mes',
-      'Seguro LC con descuentos',
+      'Clínicas presenciales (mar y jue mañana, mié tarde)',
+      'Acceso completo a Farmacias y talleres',
+      'Tutoría con tu pareja lingüística (Seguro LC)',
+      'Seguro LC con descuentos en actividades',
+      'Certificado de aprovechamiento al completar',
     ],
     destacado: false,
   },
@@ -73,11 +75,12 @@ const planes: {
     nombre: 'Curso completo',
     precio: '945€',
     periodo: '/ 3 meses',
-    desc: 'Ahorra 160€ con pago anticipado (−15%).',
+    desc: 'Todo lo del plan mensual, los 3 meses. Ahorra 160€ (−15%).',
     features: [
       'Los 3 meses completos del programa',
+      'Acceso total a Farmacias, talleres y tutoría',
       'Mini serie web + Laboratorio de cine',
-      'Excursiones y actividades incluidas',
+      'Seguro LC con descuentos en actividades y excursiones',
       'Certificado de aprovechamiento',
     ],
     destacado: true,
@@ -87,11 +90,13 @@ const planes: {
     nombre: 'A demanda',
     precio: '5€',
     periodo: '/ hora',
-    desc: 'Elige actividades sueltas.',
+    desc: 'Paga por horas. Ideal para estancias cortas.',
     features: [
-      'Paga solo lo que uses',
-      'Ideal para estancias cortas',
-      'Acceso a la agenda cultural',
+      'Diagnóstico y La Doctora (IA), gratis',
+      'Pagas solo las horas presenciales que asistas',
+      'Cada bono de horas abre toda la clínica digital esa semana',
+      'Actividades culturales a precio completo',
+      'Certificado de aprovechamiento al completar',
     ],
     destacado: false,
   },
@@ -133,9 +138,9 @@ export default async function ProgramaPage() {
           </span>
           <h1 className="text-4xl md:text-5xl font-bold mb-4 drop-shadow">El Programa</h1>
           <p className="text-lg text-white/85 max-w-2xl mx-auto">
-            Tres meses de español vivido en Granada: lunes, miércoles y viernes, 7-8 horas al día
-            (20-22 h semanales) combinando clínicas lingüísticas, cultura y la producción de una
-            mini serie web.
+            Tres meses de español vivido en Granada: martes, miércoles y jueves —martes y jueves de
+            10:00 a 14:00, miércoles de 16:00 a 20:00 (12 h semanales)— combinando clínicas
+            lingüísticas, cultura y la producción de una mini serie web.
           </p>
         </div>
       </section>
@@ -203,9 +208,17 @@ export default async function ProgramaPage() {
               </div>
             ))}
           </div>
-          <p className="text-center text-xs text-clinic-blue/40 mt-8">
-            Precio del curso completo sin descuento: 1.105€. El pago anticipado aplica un 15% de
-            descuento (945€). Importes orientativos del proyecto.
+          <p className="text-center text-sm text-clinic-blue/70 mt-8">
+            ¿Solo curioseando?{' '}
+            <a href="/login" className="text-clinic-red underline font-semibold">
+              Regístrate gratis
+            </a>{' '}
+            y prueba el diagnóstico, La Doctora y una muestra de los recursos.
+          </p>
+          <p className="text-center text-xs text-clinic-blue/40 mt-3">
+            Las actividades y excursiones culturales se pagan aparte (con descuento del Seguro LC para
+            las suscripciones). Precio del curso completo sin descuento: 1.105€; el pago anticipado
+            aplica un 15% (945€). Importes orientativos del proyecto.
           </p>
         </div>
       </section>

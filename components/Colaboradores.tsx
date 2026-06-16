@@ -50,7 +50,7 @@ export default function Colaboradores() {
 
       <p className="text-center text-xs text-clinic-blue/40 mt-8">
         ¿Tu entidad quiere colaborar con la Clínica?{' '}
-        <a href="/sobre-clinica" className="underline">
+        <a href="/contacto" className="underline">
           Escríbenos
         </a>
         .

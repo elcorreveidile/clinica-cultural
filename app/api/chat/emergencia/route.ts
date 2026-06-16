@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { askClaudeLinguistic } from '@/lib/claude';
 import { getSessionUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+import { tieneAccesoCompleto, LIMITE_CONSULTAS_VISITANTE } from '@/lib/planes';
 import type { LanguageLevel } from '@/lib/types';
 
 const schema = z.object({
@@ -26,6 +27,18 @@ export async function POST(request: NextRequest) {
     const parsed = schema.safeParse(await request.json());
     if (!parsed.success) {
       return NextResponse.json({ error: 'Mensajes no válidos' }, { status: 400 });
+    }
+
+    // Límite de consultas para visitantes (sin suscripción): tras 3 consultas
+    // gratuitas, La Doctora propone un plan en lugar de responder.
+    if (!tieneAccesoCompleto(user)) {
+      const usadas = await prisma.chatLineaEmergencia.count({ where: { userId: user.id } });
+      if (usadas >= LIMITE_CONSULTAS_VISITANTE) {
+        return NextResponse.json({
+          response: `💊 Has agotado tus **${LIMITE_CONSULTAS_VISITANTE} consultas gratuitas** con La Doctora.\n\nPara seguir con **consultas ilimitadas** y acceso a toda la clínica, échale un ojo a los planes en [Ver planes](/programa). ¡Te espero dentro! 🩺`,
+          limitReached: true,
+        });
+      }
     }
 
     const { messages } = parsed.data;

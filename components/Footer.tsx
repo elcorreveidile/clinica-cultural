@@ -38,6 +38,9 @@ export default function Footer() {
         <div>
           <p className="font-heading text-lg">Clínica Cultural y Lingüística de Español</p>
           <p className="text-white/60 text-sm mt-1">Universidad de Granada · 2026</p>
+          <Link href="/contacto" className="inline-block mt-3 text-clinic-gold hover:underline text-sm font-semibold">
+            Contacto
+          </Link>
         </div>
 
         {/* Legal */}

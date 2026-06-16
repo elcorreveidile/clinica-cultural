@@ -17,7 +17,7 @@ export const COLABORADORES: Colaborador[] = [
   {
     nombre: 'Centro de Lenguas Modernas',
     tipo: 'Colaborador académico',
-    url: 'https://www.clm-ugr.es',
+    url: 'https://clm-granada.com',
   },
   {
     nombre: 'Espacio V Centenario · UGR',
