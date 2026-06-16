@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { getSessionUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+import { limpiarAnalisis } from '@/lib/utils';
 import DiagnosticoTest from '@/components/Forms/DiagnosticoTest';
 import ChatMarkdown from '@/components/Chat/ChatMarkdown';
 
@@ -94,7 +95,7 @@ export default async function DiagnosticoPage({
                 </Link>
               </div>
               <div className="text-clinic-blue/85">
-                <ChatMarkdown content={diagnosis.initialTreatmentPlan} />
+                <ChatMarkdown content={limpiarAnalisis(diagnosis.initialTreatmentPlan)} />
               </div>
             </div>
           )}

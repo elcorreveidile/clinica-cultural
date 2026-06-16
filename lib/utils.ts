@@ -17,3 +17,25 @@ export function generateCardNumber(): string {
 export function displayName(user: { fullName: string | null; email: string }): string {
   return user.fullName?.trim() || user.email.split('@')[0];
 }
+
+/**
+ * Normaliza el análisis del diagnóstico. Si proviene de un formato antiguo
+ * (un objeto JSON con "analisis"), extrae solo el markdown legible. Si ya es
+ * markdown, lo devuelve tal cual.
+ */
+export function limpiarAnalisis(raw: string | null | undefined): string {
+  if (!raw) return '';
+  const t = raw.trim();
+  if (t.startsWith('{') && t.includes('"analisis"')) {
+    // Captura el valor de "analisis" (último campo) aunque el JSON sea inválido.
+    const m = t.match(/"analisis"\s*:\s*"([\s\S]*)"\s*\}?\s*$/);
+    let val = m ? m[1] : t;
+    val = val
+      .replace(/\\n/g, '\n')
+      .replace(/\\t/g, '\t')
+      .replace(/\\"/g, '"')
+      .replace(/\\\\/g, '\\');
+    return val.trim();
+  }
+  return raw;
+}
