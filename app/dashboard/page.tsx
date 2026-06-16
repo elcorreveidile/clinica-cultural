@@ -20,7 +20,7 @@ export default async function DashboardPage() {
     {
       href: '/dashboard/diagnostico',
       title: 'Diagnóstico',
-      icon: '🩺',
+      icon: '/imgs/iconos/diagnostico_icon.png',
       status: user.currentLevel
         ? `Nivel diagnosticado: ${user.currentLevel}`
         : diagnosis
@@ -31,21 +31,21 @@ export default async function DashboardPage() {
     {
       href: '/dashboard/farmacias',
       title: 'Farmacias Lingüísticas',
-      icon: '💊',
+      icon: '/imgs/iconos/farmacia_icon.png',
       status: 'Píldoras, pomadas y jarabes a tu nivel',
       color: 'border-clinic-green',
     },
     {
       href: '/dashboard/seguro-lc',
       title: 'Seguro LC',
-      icon: '🪪',
+      icon: '/imgs/iconos/seguro_icon.png',
       status: seguro ? `Tarjeta ${seguro.cardNumber}` : 'Sin activar todavía',
       color: 'border-clinic-gold',
     },
     {
       href: '/dashboard/emergencia',
       title: 'Emergencia Lingüística',
-      icon: '🚨',
+      icon: '/imgs/iconos/emergencia_icon.png',
       status: 'Chatea con El Doctor (IA) ahora',
       color: 'border-clinic-blue',
     },
@@ -69,7 +69,7 @@ export default async function DashboardPage() {
             href={c.href}
             className={`block bg-white border-l-4 ${c.color} border border-clinic-gray rounded-2xl p-6 hover:shadow-md transition`}
           >
-            <div className="text-3xl mb-3">{c.icon}</div>
+            <img src={c.icon} alt="" className="w-12 h-12 mb-3 object-contain" />
             <h2 className="text-lg font-bold text-clinic-blue">{c.title}</h2>
             <p className="text-clinic-blue/60 text-sm mt-1">{c.status}</p>
           </Link>

@@ -68,8 +68,11 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-clinic-gray/40 px-4">
       <div className="bg-white p-8 rounded-2xl border border-clinic-gray max-w-md w-full shadow-sm animate-fade-in">
         <div className="text-center mb-8">
-          <div className="text-4xl mb-2">🏥</div>
-          <h1 className="text-2xl font-bold text-clinic-red">Clínica Cultural</h1>
+          <img
+            src="/imgs/logos/logo_clinica.png"
+            alt="Clínica Cultural y Lingüística"
+            className="h-24 w-auto mx-auto mb-2 object-contain"
+          />
           <p className="text-clinic-blue/60">Sala de Diagnóstico LC</p>
         </div>
 
