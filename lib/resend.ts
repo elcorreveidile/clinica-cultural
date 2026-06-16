@@ -25,12 +25,20 @@ export async function sendMagicLinkEmail({ to, magicLink }: SendMagicLinkArgs): 
     return { delivered: false, magicLink };
   }
 
-  await resend.emails.send({
+  const { error } = await resend.emails.send({
     from: process.env.EMAIL_FROM || 'Clínica Cultural <onboarding@resend.dev>',
     to,
     subject: '🔑 Tu enlace mágico — Clínica Cultural y Lingüística',
     html: magicLinkEmailHtml(magicLink),
   });
+
+  // El SDK de Resend NO lanza excepción: devuelve { error } cuando el envío
+  // es rechazado (dominio sin verificar, destinatario no permitido en modo
+  // test, etc.). Lo propagamos para no mostrar un falso "enviado".
+  if (error) {
+    console.error('Resend error:', error);
+    throw new Error(`Resend rechazó el envío: ${error.message ?? 'desconocido'}`);
+  }
 
   return { delivered: true, magicLink };
 }

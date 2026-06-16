@@ -60,12 +60,22 @@ export async function consumeMagicLinkToken(raw: string): Promise<string | null>
   return record.email;
 }
 
-/** Crea (o recupera) el usuario asociado al email tras verificar el token. */
+/** Lista de emails (env ADMIN_EMAILS, separados por comas) con rol admin. */
+function adminEmails(): string[] {
+  return (process.env.ADMIN_EMAILS || '')
+    .split(',')
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean);
+}
+
+/** Crea (o recupera) el usuario asociado al email tras verificar el token.
+ *  Si el email está en ADMIN_EMAILS, se asegura el rol admin. */
 export async function upsertUserByEmail(email: string) {
+  const isAdmin = adminEmails().includes(email.toLowerCase());
   return prisma.user.upsert({
     where: { email },
-    update: {},
-    create: { email, role: 'patient' },
+    update: isAdmin ? { role: 'admin' } : {},
+    create: { email, role: isAdmin ? 'admin' : 'patient' },
   });
 }
 
