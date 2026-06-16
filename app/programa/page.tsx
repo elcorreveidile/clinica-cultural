@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import Logo from '@/components/Logo';
 import Footer from '@/components/Footer';
+import MatriculaButton from '@/components/MatriculaButton';
+import type { PlanId } from '@/lib/stripe';
 
 export const metadata = {
   title: 'Programa y precios · Clínica Cultural',
@@ -41,8 +43,17 @@ const fases = [
   },
 ];
 
-const planes = [
+const planes: {
+  id: PlanId;
+  nombre: string;
+  precio: string;
+  periodo: string;
+  desc: string;
+  features: string[];
+  destacado: boolean;
+}[] = [
   {
+    id: 'mensual',
     nombre: 'Mensual',
     precio: '350€',
     periodo: '/ mes',
@@ -55,6 +66,7 @@ const planes = [
     destacado: false,
   },
   {
+    id: 'curso',
     nombre: 'Curso completo',
     precio: '945€',
     periodo: '/ 3 meses',
@@ -68,6 +80,7 @@ const planes = [
     destacado: true,
   },
   {
+    id: 'demanda',
     nombre: 'A demanda',
     precio: '5€',
     periodo: '/ hora',
@@ -177,16 +190,9 @@ export default function ProgramaPage() {
                     </li>
                   ))}
                 </ul>
-                <Link
-                  href="/login"
-                  className={`block text-center px-6 py-3 rounded-xl font-bold transition ${
-                    p.destacado
-                      ? 'bg-clinic-red text-white hover:bg-clinic-red/90'
-                      : 'border border-clinic-gray text-clinic-blue hover:bg-clinic-gray/40'
-                  }`}
-                >
-                  Empezar
-                </Link>
+                <MatriculaButton plan={p.id} destacado={p.destacado}>
+                  Matricularme
+                </MatriculaButton>
               </div>
             ))}
           </div>
