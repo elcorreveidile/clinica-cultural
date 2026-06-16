@@ -36,6 +36,13 @@ export default async function DashboardPage() {
       color: 'border-clinic-green',
     },
     {
+      href: '/dashboard/actividades',
+      title: 'Actividades culturales',
+      icon: '/imgs/iconos/calendario_icon.png',
+      status: 'Agenda de inmersión con descuento Seguro LC',
+      color: 'border-clinic-gold',
+    },
+    {
       href: '/dashboard/seguro-lc',
       title: 'Seguro LC',
       icon: '/imgs/iconos/seguro_icon.png',
