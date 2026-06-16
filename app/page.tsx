@@ -29,7 +29,7 @@ export default async function Home() {
   return (
     <main className="min-h-screen bg-clinic-white">
       {/* Header */}
-      <header className="sticky top-0 z-20 bg-clinic-white border-b border-clinic-gray">
+      <header className="sticky top-0 z-20 bg-white border-b border-clinic-gray">
         <div className="max-w-6xl mx-auto px-6 py-3 flex justify-between items-center">
           <Logo />
           <nav className="flex items-center gap-4">

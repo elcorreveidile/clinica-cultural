@@ -12,7 +12,7 @@ export default function Logo({
   return (
     <Link href={href} className={`inline-flex items-center ${className}`}>
       <img
-        src="/imgs/logos/logo_clinica.png?v=2"
+        src="/imgs/logos/logo_clinica.png?v=3"
         alt="Clínica Cultural y Lingüística"
         className="h-12 md:h-14 w-auto object-contain"
       />
