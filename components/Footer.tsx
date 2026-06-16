@@ -61,7 +61,7 @@ export default function Footer() {
         <div className="text-sm">
           <span className="uppercase text-xs tracking-wider text-white/40 mb-1 block">Desarrollo</span>
           <a
-            href="https://pordosduros.com"
+            href="https://www.por2duros.com"
             target="_blank"
             rel="noopener noreferrer"
             onMouseEnter={nuevaFrase}
@@ -70,7 +70,7 @@ export default function Footer() {
             <span className="text-white/80 group-hover:text-white transition">
               Desarrollado por{' '}
               <strong className="text-clinic-gold">Por 2 duros</strong> ·{' '}
-              <span className="underline decoration-clinic-gold/40">pordosduros.com</span>
+              <span className="underline decoration-clinic-gold/40">por2duros.com</span>
             </span>
             <span className="text-white/50 italic min-h-[1.25rem] opacity-70 group-hover:opacity-100 transition">
               “{frase}”
