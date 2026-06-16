@@ -4,7 +4,11 @@ import { getSessionUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import DiagnosticoTest from '@/components/Forms/DiagnosticoTest';
 
-export default async function DiagnosticoPage() {
+export default async function DiagnosticoPage({
+  searchParams,
+}: {
+  searchParams: { rehacer?: string };
+}) {
   const user = await getSessionUser();
   if (!user) redirect('/login');
 
@@ -12,6 +16,9 @@ export default async function DiagnosticoPage() {
     where: { userId: user.id },
     orderBy: { createdAt: 'desc' },
   });
+
+  const mostrarResultados =
+    diagnosis && user.currentLevel && searchParams?.rehacer !== '1';
 
   return (
     <div className="space-y-4 animate-fade-in">
@@ -24,7 +31,7 @@ export default async function DiagnosticoPage() {
         </p>
       </div>
 
-      {diagnosis && user.currentLevel ? (
+      {mostrarResultados ? (
         <div className="space-y-4">
           <div className="bg-white border border-clinic-gray rounded-2xl p-6 md:p-8">
             <p className="text-clinic-blue/60">Tu nivel orientativo es</p>
@@ -65,6 +72,12 @@ export default async function DiagnosticoPage() {
                 className="px-5 py-2.5 border border-clinic-gray rounded-lg font-semibold text-clinic-blue hover:bg-clinic-gray/40"
               >
                 Consultar a El Doctor
+              </Link>
+              <Link
+                href="/dashboard/diagnostico?rehacer=1"
+                className="px-5 py-2.5 border border-clinic-gray rounded-lg font-semibold text-clinic-blue/70 hover:bg-clinic-gray/40"
+              >
+                🔁 Rehacer diagnóstico
               </Link>
             </div>
           </div>
