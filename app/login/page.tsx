@@ -69,7 +69,7 @@ export default function LoginPage() {
       <div className="bg-white p-8 rounded-2xl border border-clinic-gray max-w-md w-full shadow-sm animate-fade-in">
         <div className="text-center mb-8">
           <img
-            src="/imgs/logos/logo_clinica.png"
+            src="/imgs/logos/logo_clinica.png?v=2"
             alt="Clínica Cultural y Lingüística"
             className="h-24 w-auto mx-auto mb-2 object-contain"
           />
