@@ -46,12 +46,12 @@ export default async function Home() {
         </div>
       </header>
 
-      {/* Hero — foto a sangre del carmen granadino con tratamiento cálido + titular */}
+      {/* Hero — banners del Espacio V Centenario (UGR) con tratamiento cálido + titular */}
       <section className="relative isolate overflow-hidden min-h-[78vh] flex items-end animate-fade-in">
         {/* Foto base (ya viene con grado cálido horneado) */}
         <img
-          src="/imgs/backgrounds/hero_carmen.jpg"
-          alt="Carmen granadino: fachada, torre y jardín con naranjos"
+          src="/imgs/backgrounds/hero_banners.jpg"
+          alt="Banners del Espacio V Centenario de la Universidad de Granada"
           className="absolute inset-0 -z-20 w-full h-full object-cover"
         />
         {/* Toque cálido muy sutil */}
