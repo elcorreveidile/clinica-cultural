@@ -5,6 +5,7 @@ import { prisma } from '@/lib/prisma';
 import { recursosDe, DOSIS, FORMATO_LABEL } from '@/lib/recursos';
 import ChatMarkdown from '@/components/Chat/ChatMarkdown';
 import RecursoPdfButton from '@/components/RecursoPdfButton';
+import LexicoChip from '@/components/LexicoChip';
 
 export const dynamic = 'force-dynamic';
 
@@ -77,6 +78,23 @@ export default async function FarmaciaDetallePage({ params }: { params: { id: st
                 <div className="px-5 pb-5 -mt-1 border-t border-clinic-gray/60 pt-4">
                   <p className="text-sm text-clinic-blue/60 mb-3">{r.descripcion}</p>
                   <ChatMarkdown content={r.contenido} />
+
+                  {r.lexico && Object.keys(r.lexico).length > 0 && (
+                    <div className="mt-5 pt-4 border-t border-clinic-gray/60">
+                      <p className="text-xs font-semibold uppercase tracking-wide text-clinic-gold mb-2">
+                        📌 Léxico de la cápsula
+                      </p>
+                      <p className="text-xs text-clinic-blue/50 mb-3">
+                        Pulsa (o pasa el ratón por) una palabra para ver su significado y abrir el diccionario de la RAE.
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {Object.entries(r.lexico).map(([palabra, definicion]) => (
+                          <LexicoChip key={palabra} palabra={palabra} definicion={definicion} />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   {r.url && (
                     <a
                       href={r.url}
@@ -98,6 +116,7 @@ export default async function FarmaciaDetallePage({ params }: { params: { id: st
                       duracionMin: r.duracionMin,
                       descripcion: r.descripcion,
                       contenido: r.contenido,
+                      lexico: r.lexico,
                     }}
                   />
                 </div>

@@ -7,13 +7,32 @@ import type { Ruta } from '@/lib/rutas';
 
 const CENTRO: [number, number] = [37.1773, -3.5916]; // Granada
 
-export default function MapaRutas({ rutas }: { rutas: Ruta[] }) {
+// Centro medio de las paradas de una ruta (para las páginas de detalle).
+function centroDe(rutas: Ruta[]): [number, number] {
+  const puntos = rutas.flatMap((r) => r.paradas.map((p) => p.coords));
+  if (puntos.length === 0) return CENTRO;
+  const lat = puntos.reduce((a, p) => a + p[0], 0) / puntos.length;
+  const lng = puntos.reduce((a, p) => a + p[1], 0) / puntos.length;
+  return [lat, lng];
+}
+
+export default function MapaRutas({
+  rutas,
+  mostrarFiltros = true,
+  zoom = 14,
+}: {
+  rutas: Ruta[];
+  mostrarFiltros?: boolean;
+  zoom?: number;
+}) {
   const [activa, setActiva] = useState<string>('todas');
   const visibles = activa === 'todas' ? rutas : rutas.filter((r) => r.slug === activa);
+  const centro = mostrarFiltros ? CENTRO : centroDe(rutas);
 
   return (
     <div>
       {/* Filtros */}
+      {mostrarFiltros && (
       <div className="flex flex-wrap gap-2 mb-4">
         <button
           onClick={() => setActiva('todas')}
@@ -42,10 +61,11 @@ export default function MapaRutas({ rutas }: { rutas: Ruta[] }) {
           </button>
         ))}
       </div>
+      )}
 
       <MapContainer
-        center={CENTRO}
-        zoom={14}
+        center={centro}
+        zoom={zoom}
         scrollWheelZoom={false}
         style={{ height: '70vh', width: '100%', borderRadius: '1rem' }}
       >

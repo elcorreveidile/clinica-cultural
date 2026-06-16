@@ -13,6 +13,7 @@ export interface RecursoPdf {
   duracionMin: number;
   descripcion: string;
   contenido: string;
+  lexico?: Record<string, string>;
 }
 
 export default function RecursoPdfButton({
@@ -90,6 +91,25 @@ export default function RecursoPdfButton({
             <div className="text-sm">
               <ChatMarkdown content={recurso.contenido} />
             </div>
+
+            {recurso.lexico && Object.keys(recurso.lexico).length > 0 && (
+              <div className="mt-8 salto-pagina">
+                <h2 className="text-lg font-bold text-clinic-red mb-3">📌 Léxico de la cápsula</h2>
+                <dl className="text-sm">
+                  {Object.entries(recurso.lexico).map(([palabra, definicion]) => (
+                    <div key={palabra} className="mb-2 break-inside-avoid">
+                      <dt className="font-bold text-clinic-blue inline">{palabra}: </dt>
+                      <dd className="inline text-clinic-blue/80">
+                        {definicion.replace(/\s*\/\/\s*/g, ' · ')}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+                <p className="text-xs text-clinic-blue/50 mt-2">
+                  Consulta cada palabra en el diccionario de la RAE: dle.rae.es
+                </p>
+              </div>
+            )}
 
             <footer className="border-t border-clinic-gray pt-4 mt-8 text-xs text-clinic-blue/50">
               Clínica Cultural y Lingüística de Español · Universidad de Granada · 2026
