@@ -6,6 +6,10 @@ export const metadata: Metadata = {
   title: 'Clínica Cultural y Lingüística de Español',
   description:
     'No es un curso. Es una experiencia integral que combina el aprendizaje del español con inmersión cultural en Granada.',
+  icons: {
+    icon: '/imgs/logos/logo.png',
+    apple: '/imgs/logos/logo.png',
+  },
 };
 
 export default function RootLayout({

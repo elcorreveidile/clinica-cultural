@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 
-const items = [
+const baseItems = [
   { href: '/dashboard', label: 'Resumen', icon: '🏠' },
   { href: '/dashboard/diagnostico', label: 'Diagnóstico', icon: '🩺' },
   { href: '/dashboard/farmacias', label: 'Farmacias', icon: '💊' },
@@ -12,8 +12,11 @@ const items = [
   { href: '/dashboard/emergencia', label: 'Emergencia IA', icon: '🚨' },
 ];
 
-export default function DashboardNav() {
+const adminItem = { href: '/dashboard/admin', label: 'Administración', icon: '🛡️' };
+
+export default function DashboardNav({ isAdmin = false }: { isAdmin?: boolean }) {
   const pathname = usePathname();
+  const items = isAdmin ? [...baseItems, adminItem] : baseItems;
 
   return (
     <nav className="bg-white border border-clinic-gray rounded-2xl p-2 flex md:flex-col gap-1 overflow-x-auto">
