@@ -94,6 +94,7 @@ export default function DiagnosticoTest() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
       toast.success(`¡Diagnóstico completado! Nivel ${data.level}`);
+      router.replace('/dashboard/diagnostico'); // limpia ?rehacer y muestra resultados
       router.refresh();
     } catch {
       toast.error('No pudimos guardar tu diagnóstico.');
