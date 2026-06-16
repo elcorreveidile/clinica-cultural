@@ -79,14 +79,28 @@ function adminEmails(): string[] {
     .filter(Boolean);
 }
 
+/** Lista de emails (env PROFESSOR_EMAILS, separados por comas) con rol profesor. */
+function professorEmails(): string[] {
+  return (process.env.PROFESSOR_EMAILS || '')
+    .split(',')
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean);
+}
+
 /** Crea (o recupera) el usuario asociado al email tras verificar el token.
- *  Si el email está en ADMIN_EMAILS, se asegura el rol admin. */
+ *  Asigna automáticamente el rol según ADMIN_EMAILS / PROFESSOR_EMAILS. */
 export async function upsertUserByEmail(email: string) {
-  const isAdmin = adminEmails().includes(email.toLowerCase());
+  const lower = email.toLowerCase();
+  const isAdmin = adminEmails().includes(lower);
+  const isProfessor = !isAdmin && professorEmails().includes(lower);
+  // Rol forzado por configuración (admin gana sobre profesor). Si no, paciente.
+  const rolConfig = isAdmin ? 'admin' : isProfessor ? 'professor' : null;
+
   return prisma.user.upsert({
     where: { email },
-    update: isAdmin ? { role: 'admin' } : {},
-    create: { email, role: isAdmin ? 'admin' : 'patient' },
+    // No degradamos a quien ya tiene rol; solo aseguramos el rol configurado.
+    update: rolConfig ? { role: rolConfig } : {},
+    create: { email, role: rolConfig ?? 'patient' },
   });
 }
 
