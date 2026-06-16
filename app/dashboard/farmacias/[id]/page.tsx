@@ -4,6 +4,7 @@ import { getSessionUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { recursosDe, DOSIS, FORMATO_LABEL } from '@/lib/recursos';
 import ChatMarkdown from '@/components/Chat/ChatMarkdown';
+import RecursoPdfButton from '@/components/RecursoPdfButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -86,6 +87,19 @@ export default async function FarmaciaDetallePage({ params }: { params: { id: st
                       Abrir recurso externo ↗
                     </a>
                   )}
+                  <RecursoPdfButton
+                    farmaciaNombre={farmacia.name}
+                    recurso={{
+                      id: r.id,
+                      titulo: r.titulo,
+                      dosisLabel: dosis.label,
+                      formatoLabel: FORMATO_LABEL[r.formato],
+                      nivel: r.nivel,
+                      duracionMin: r.duracionMin,
+                      descripcion: r.descripcion,
+                      contenido: r.contenido,
+                    }}
+                  />
                 </div>
               </details>
             );
