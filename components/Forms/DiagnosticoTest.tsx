@@ -47,14 +47,38 @@ const GRAMATICA: MCQ[] = [
 
 const AUDITIVA = {
   texto:
-    'Hola, me llamo Lucía y vivo en Granada desde hace tres años. Soy de Argentina, pero vine a España para hacer un máster en Historia del Arte. Al principio me costó bastante adaptarme: el acento andaluz era muy rápido para mí y no entendía casi nada en los bares. Poco a poco, sin embargo, fui acostumbrándome y ahora me defiendo sin problemas. Trabajo por las mañanas en una librería del centro y por las tardes estudio italiano en el Centro de Lenguas Modernas. Los fines de semana suelo pasear por el Albaicín, y si hace buen tiempo, subo al mirador de San Nicolás para ver la Alhambra al atardecer. Lo que más me gusta de la ciudad es que, aunque es pequeña, siempre hay algo cultural que hacer.',
+    'Buenos días. Me llamo Marta y soy profesora de música, aunque ahora mismo no trabajo en ningún colegio, sino que doy clases particulares de piano en mi casa. Antes vivía en Sevilla, pero hace dos años me mudé a Granada por motivos familiares, no por trabajo. Reconozco que al principio no me gustaba nada la ciudad: la encontraba demasiado pequeña y tranquila. Sin embargo, con el tiempo he cambiado de opinión y hoy no me iría de aquí por nada del mundo. Entre semana suelo levantarme tarde, porque mis clases empiezan a mediodía y no terminan hasta las nueve de la noche; por eso el día que más espero es el domingo, cuando por fin puedo desayunar sin prisa. Hace poco he empezado a aprender árabe, y no lo hago porque lo necesite para mi trabajo, sino simplemente porque me apetecía. Lo que peor llevo de Granada es el frío del invierno, que no me esperaba: todos me habían hablado del calor del verano, pero nadie me avisó de las heladas.',
   preguntas: [
-    { q: '¿De dónde es Lucía?', options: ['De España', 'De Argentina', 'De Italia', 'De México'], answer: 1 },
-    { q: '¿Por qué vino a Granada?', options: ['Por trabajo', 'Para hacer un máster', 'De vacaciones', 'Por su familia'], answer: 1 },
-    { q: '¿Qué le costó al principio?', options: ['Encontrar piso', 'Entender el acento andaluz', 'Hacer amigos', 'El clima'], answer: 1 },
-    { q: '¿Dónde estudia italiano?', options: ['En la universidad', 'En casa', 'En el Centro de Lenguas Modernas', 'En una academia privada'], answer: 2 },
-    { q: '¿Qué hace si hace buen tiempo el fin de semana?', options: ['Se queda en casa', 'Sube al mirador de San Nicolás', 'Va a la playa', 'Trabaja más'], answer: 1 },
-    { q: '¿Qué es lo que más le gusta de Granada?', options: ['Que es muy grande', 'Que siempre hay algo cultural', 'Que es barata', 'Que hace calor'], answer: 1 },
+    {
+      q: '¿A qué se dedica Marta actualmente?',
+      options: ['Es profesora en un colegio', 'Da clases particulares de piano', 'Estudia música', 'Trabaja en una academia'],
+      answer: 1,
+    },
+    {
+      q: '¿Por qué se mudó a Granada?',
+      options: ['Por trabajo', 'Por motivos familiares', 'Para estudiar', 'Por el clima'],
+      answer: 1,
+    },
+    {
+      q: '¿Qué opina ahora de la ciudad?',
+      options: ['Le sigue pareciendo demasiado tranquila', 'Le encanta y no se iría', 'Quiere volver a Sevilla', 'Le resulta indiferente'],
+      answer: 1,
+    },
+    {
+      q: '¿A qué hora terminan sus clases?',
+      options: ['A mediodía', 'A las nueve de la noche', 'Por la mañana temprano', 'Los domingos'],
+      answer: 1,
+    },
+    {
+      q: '¿Por qué estudia árabe?',
+      options: ['Porque lo necesita para su trabajo', 'Porque le apetecía', 'Porque vivió en un país árabe', 'Porque se lo pidió un alumno'],
+      answer: 1,
+    },
+    {
+      q: '¿Qué es lo que peor lleva de Granada?',
+      options: ['El calor del verano', 'El frío del invierno', 'Que sea pequeña', 'El ruido'],
+      answer: 1,
+    },
   ] as MCQ[],
 };
 
