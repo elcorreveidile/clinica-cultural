@@ -34,6 +34,9 @@ export default async function Home() {
         <div className="max-w-6xl mx-auto px-6 py-3 flex justify-between items-center">
           <Logo />
           <nav className="flex items-center gap-4">
+            <Link href="/programa" className="hidden sm:inline text-clinic-blue/70 hover:text-clinic-blue">
+              Programa
+            </Link>
             <Link href="/sobre-clinica" className="hidden sm:inline text-clinic-blue/70 hover:text-clinic-blue">
               Sobre la clínica
             </Link>
