@@ -59,7 +59,6 @@ export default function Footer() {
 
         {/* Desarrollo + guiño */}
         <div className="text-sm">
-          <span className="uppercase text-xs tracking-wider text-white/40 mb-1 block">Desarrollo</span>
           <a
             href="https://www.por2duros.com"
             target="_blank"
@@ -68,7 +67,7 @@ export default function Footer() {
             className="group inline-flex flex-col gap-1"
           >
             <span className="text-white/80 group-hover:text-white transition">
-              Desarrollado por{' '}
+              Desarrollo:{' '}
               <strong className="text-clinic-gold underline decoration-clinic-gold/40">
                 Por 2 duros
               </strong>
