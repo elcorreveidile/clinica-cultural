@@ -13,7 +13,15 @@ export interface FichaInicial {
   bio: string;
 }
 
-export default function FichaForm({ inicial }: { inicial: FichaInicial }) {
+export default function FichaForm({
+  inicial,
+  redirectTo = '/dashboard',
+  submitLabel = 'Completar ficha y entrar',
+}: {
+  inicial: FichaInicial;
+  redirectTo?: string | null;
+  submitLabel?: string;
+}) {
   const router = useRouter();
   const [f, setF] = useState<FichaInicial>(inicial);
   const [loading, setLoading] = useState(false);
@@ -35,8 +43,8 @@ export default function FichaForm({ inicial }: { inicial: FichaInicial }) {
         body: JSON.stringify(f),
       });
       if (!res.ok) throw new Error();
-      toast.success('¡Ficha completada! Bienvenido/a a la Clínica.');
-      router.push('/dashboard');
+      toast.success(redirectTo ? '¡Ficha completada! Bienvenido/a a la Clínica.' : 'Cambios guardados.');
+      if (redirectTo) router.push(redirectTo);
       router.refresh();
     } catch {
       toast.error('No pudimos guardar tu ficha. Inténtalo de nuevo.');
@@ -93,7 +101,7 @@ export default function FichaForm({ inicial }: { inicial: FichaInicial }) {
         disabled={loading}
         className="w-full py-3 bg-clinic-red text-white font-bold rounded-lg hover:bg-clinic-red/90 disabled:opacity-50 transition"
       >
-        {loading ? 'Guardando…' : 'Completar ficha y entrar'}
+        {loading ? 'Guardando…' : submitLabel}
       </button>
     </form>
   );
