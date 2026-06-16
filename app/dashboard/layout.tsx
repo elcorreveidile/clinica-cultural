@@ -11,6 +11,8 @@ export default async function DashboardLayout({
 }) {
   const user = await getSessionUser();
   if (!user) redirect('/login');
+  // Primer acceso: si no ha completado su ficha de paciente, va a completarla.
+  if (!user.fullName) redirect('/completar-perfil');
 
   return (
     <div className="min-h-screen bg-clinic-gray/30">

@@ -108,6 +108,7 @@ model User {
   role              UserRole       @default(patient)
   dateOfBirth       DateTime?      @map("date_of_birth")
   nationality       String?
+  nativeLanguage    String?        @map("native_language")
   currentLevel      LanguageLevel? @map("current_level")
   profilePictureUrl String?        @map("profile_picture_url")
   bio               String?
