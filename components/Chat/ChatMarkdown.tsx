@@ -3,13 +3,14 @@
 import Link from 'next/link';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import remarkBreaks from 'remark-breaks';
 
 /** Renderiza el markdown del Doctor: enlaces internos clicables, tablas, listas… */
 export default function ChatMarkdown({ content }: { content: string }) {
   return (
-    <div className="space-y-2 text-sm leading-relaxed [&_p]:m-0 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_li]:my-0.5 [&_h1]:font-bold [&_h2]:font-bold [&_h3]:font-bold [&_h1]:text-base [&_h2]:text-base [&_h3]:text-sm [&_code]:bg-clinic-blue/10 [&_code]:px-1 [&_code]:rounded">
+    <div className="space-y-2 text-sm leading-relaxed break-words [overflow-wrap:anywhere] [&_p]:m-0 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_li]:my-0.5 [&_h1]:font-bold [&_h2]:font-bold [&_h3]:font-bold [&_h1]:text-base [&_h2]:text-base [&_h3]:text-sm [&_code]:bg-clinic-blue/10 [&_code]:px-1 [&_code]:rounded [&_pre]:whitespace-pre-wrap [&_pre]:break-words">
       <Markdown
-        remarkPlugins={[remarkGfm]}
+        remarkPlugins={[remarkGfm, remarkBreaks]}
         components={{
           a: ({ href, children }) => {
             const url = href ?? '#';
