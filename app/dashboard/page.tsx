@@ -56,6 +56,34 @@ export default async function DashboardPage() {
       status: 'Chatea con El Doctor (IA) ahora',
       color: 'border-clinic-blue',
     },
+    {
+      href: '/dashboard/laboratorio-cine',
+      title: 'Laboratorio de cine',
+      icon: '/imgs/iconos/miniserie_icon.png',
+      status: 'Produce la mini serie web del curso',
+      color: 'border-clinic-gold',
+    },
+    {
+      href: '/dashboard/escuela-poetas',
+      title: 'Escuela de Poetas',
+      icon: '/imgs/iconos/farmacia_icon.png',
+      status: 'Talleres de escritura, voz y poesía',
+      color: 'border-clinic-green',
+    },
+    {
+      href: '/dashboard/tutoria',
+      title: 'Tutoría',
+      icon: '/imgs/iconos/tutoria_icon.png',
+      status: 'Sesiones con tu tutor local',
+      color: 'border-clinic-red',
+    },
+    {
+      href: '/dashboard/portafolio',
+      title: 'Portafolio',
+      icon: '/imgs/iconos/portafolio_icon.png',
+      status: 'Tus trabajos y el feedback del profesorado',
+      color: 'border-clinic-blue',
+    },
   ];
 
   return (
