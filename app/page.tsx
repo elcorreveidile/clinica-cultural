@@ -107,17 +107,37 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Cómo funciona — infografía de la clínica */}
-      <section className="bg-clinic-gray/30 py-20">
-        <div className="max-w-5xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-clinic-blue mb-10">
+      {/* Cómo funciona — sobre textura de empedrado granadino */}
+      <section className="relative isolate overflow-hidden py-20">
+        <img
+          src="/imgs/secciones/empedrado.jpg"
+          alt="Empedrado granadino del patio del Centro de Lenguas Modernas"
+          className="absolute inset-0 -z-20 w-full h-full object-cover"
+        />
+        {/* velo cálido para legibilidad */}
+        <div className="absolute inset-0 -z-10 bg-clinic-white/80" />
+        <div className="relative max-w-5xl mx-auto px-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-clinic-blue mb-12 text-center">
             Tu paso por la clínica
           </h2>
-          <img
-            src="/imgs/secciones/seccion_clinica.png"
-            alt="Entras a la clínica, te diagnosticamos y aplicamos el tratamiento"
-            className="rounded-2xl shadow-lg w-full h-auto border border-clinic-gray bg-white"
-          />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { n: '1', t: 'Entras a consulta', d: 'Llegas con tus dudas y objetivos con el español.' },
+              { n: '2', t: 'Te diagnosticamos', d: 'Evaluamos tu nivel y diseñamos un plan a tu medida.' },
+              { n: '3', t: 'Aplicamos el tratamiento', d: 'Recursos, tutoría e inmersión cultural real.' },
+            ].map((s) => (
+              <div
+                key={s.n}
+                className="bg-white/85 backdrop-blur border border-clinic-gray rounded-2xl p-8 text-center shadow-sm"
+              >
+                <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-clinic-red text-white text-2xl font-bold flex items-center justify-center">
+                  {s.n}
+                </div>
+                <h3 className="text-xl font-bold text-clinic-blue mb-2">{s.t}</h3>
+                <p className="text-clinic-blue/60">{s.d}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
