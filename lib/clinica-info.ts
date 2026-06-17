@@ -44,12 +44,12 @@ export const SECCIONES: SeccionClinica[] = [
   {
     label: 'Seguro LC',
     ruta: '/dashboard/seguro-lc',
-    descripcion: 'Carnet del estudiante con descuentos y acceso a sesiones de tutoría.',
+    descripcion: 'Carnet del estudiante con descuentos y acceso a sesiones de mentoría.',
   },
   {
     label: 'Enfermería LC',
     ruta: '/dashboard/enfermeria-lc',
-    descripcion: 'Parejas lingüísticas y mentoría con estudiantes locales.',
+    descripcion: 'Parejas lingüísticas y mentoría con personas locales (de la UGR u otra gente de Granada).',
   },
   {
     label: 'Laboratorio de cine',
@@ -64,7 +64,8 @@ export const SECCIONES: SeccionClinica[] = [
   {
     label: 'Tutoría',
     ruta: '/dashboard/tutoria',
-    descripcion: 'Sesiones de tutoría personalizada.',
+    descripcion:
+      'Reserva de sesiones: mentoría con gente local (incluida en el Seguro LC) y tutoría con profesorado para alumnos matriculados (2 mensual / 8 trimestral).',
   },
   {
     label: 'Portafolio',

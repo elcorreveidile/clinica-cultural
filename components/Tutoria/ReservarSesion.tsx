@@ -53,11 +53,12 @@ export default function ReservarSesion({
     }
   };
 
-  if (esMentor && (disponibles ?? 0) <= 0) {
+  if ((disponibles ?? Infinity) <= 0) {
     return (
       <div className="bg-clinic-gold/10 border border-clinic-gold/30 rounded-2xl p-5 text-sm text-clinic-blue/70">
-        Has agotado las sesiones de tutoría con tu pareja. Habla con tu tutor o el equipo para ampliar
-        tu plan.
+        {esMentor
+          ? 'Has agotado las sesiones de mentoría con tu pareja. Habla con el equipo para ampliar tu plan.'
+          : 'Has agotado las tutorías con profesorado incluidas en tu paquete.'}
       </div>
     );
   }

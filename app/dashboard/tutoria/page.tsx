@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { getSessionUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { displayName } from '@/lib/utils';
-import { tienePlanProfesor } from '@/lib/planes';
+import { puedeTutoriaProfesor, cupoTutoriasEfectivo } from '@/lib/planes';
 import ReservarSesion from '@/components/Tutoria/ReservarSesion';
 import SesionAcciones from '@/components/Tutoria/SesionAcciones';
 import AceptarSolicitudButton from '@/components/Tutoria/AceptarSolicitudButton';
@@ -32,7 +32,7 @@ function ViaBadge({ esProfesor }: { esProfesor: boolean }) {
         esProfesor ? 'bg-clinic-blue/10 text-clinic-blue' : 'bg-clinic-green/10 text-clinic-green'
       }`}
     >
-      {esProfesor ? '👩‍🏫 Profesor' : '🤝 Pareja'}
+      {esProfesor ? '👩‍🏫 Tutoría' : '🤝 Mentoría'}
     </span>
   );
 }
@@ -65,17 +65,17 @@ export default async function TutoriaPage() {
       <div className="space-y-6 animate-fade-in">
         <div>
           <h1 className="text-2xl md:text-3xl font-bold text-clinic-blue flex items-center gap-2">
-            👥 Tutoría
+            👥 Tutoría y mentoría
           </h1>
           <p className="text-clinic-blue/60">
-            Gestiona las sesiones que te reservan. {esProfesor && 'Acepta solicitudes de tutoría con profesorado.'}
+            Gestiona las sesiones que te reservan. {esProfesor && 'Acepta solicitudes de tutoría de alumnos matriculados.'}
           </p>
         </div>
 
-        {/* Solicitudes de profesor sin asignar */}
+        {/* Solicitudes de tutoría sin asignar */}
         {esProfesor && (
           <div className="bg-white border border-clinic-gray rounded-2xl p-6">
-            <h2 className="font-bold text-clinic-blue mb-4">Solicitudes de tutoría (profesorado)</h2>
+            <h2 className="font-bold text-clinic-blue mb-4">Solicitudes de tutoría</h2>
             {solicitudes.length === 0 ? (
               <p className="text-clinic-blue/50 text-sm">No hay solicitudes sin asignar ahora mismo.</p>
             ) : (
@@ -168,26 +168,31 @@ export default async function TutoriaPage() {
   const disponibles = seguro
     ? seguro.mentoringSessionsTotal - seguro.mentoringSessionsUsed - programadasMentor
     : 0;
-  const tutorNombre = seguro?.linkedTutor ? displayName(seguro.linkedTutor) : 'tu tutor';
-  const premium = tienePlanProfesor(user);
+  const tutorNombre = seguro?.linkedTutor ? displayName(seguro.linkedTutor) : 'tu mentor/a';
+  const puedeTutoria = puedeTutoriaProfesor(user);
+  // Cupo de tutorías con profesorado incluido en el paquete (según el plan).
+  const cupoProfesor = cupoTutoriasEfectivo(user);
+  const usadasProfesor = sesiones.filter((s) => !s.seguroLcId && s.status !== 'cancelled').length;
+  const disponiblesProfesor = cupoProfesor - usadasProfesor;
 
   return (
     <div className="space-y-6 animate-fade-in">
       <div>
         <h1 className="text-2xl md:text-3xl font-bold text-clinic-blue flex items-center gap-2">
-          👥 Tutoría
+          👥 Tutoría y mentoría
         </h1>
         <p className="text-clinic-blue/60">
-          Refuerza tu español en sesiones de acompañamiento. Tienes dos vías: con tu{' '}
-          <strong>pareja lingüística</strong> (incluida en tu Seguro LC) o con un{' '}
-          <strong>profesor</strong> (plan de pago).
+          Refuerza tu español con sesiones de acompañamiento. La <strong>mentoría</strong> es con{' '}
+          <strong>gente local</strong> —de la UGR u otras personas de Granada— (incluida en tu Seguro
+          LC). La <strong>tutoría</strong> es con <strong>profesorado</strong> (incluida en los
+          paquetes de alumno matriculado).
         </p>
       </div>
 
-      {/* Vía 1: pareja lingüística */}
+      {/* Mentoría con gente local */}
       <div className="bg-white border border-clinic-gray rounded-2xl p-6 space-y-4">
         <div className="flex items-center gap-2">
-          <h2 className="font-bold text-clinic-blue">🤝 Con tu pareja lingüística</h2>
+          <h2 className="font-bold text-clinic-blue">🤝 Mentoría (gente local)</h2>
           <ViaBadge esProfesor={false} />
         </div>
         {tieneTutor ? (
@@ -204,8 +209,8 @@ export default async function TutoriaPage() {
         ) : (
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <p className="text-clinic-blue/60 text-sm">
-              Las sesiones con pareja están incluidas en tu Seguro LC. Activa tu seguro y solicita una
-              pareja en Enfermería LC.
+              Las sesiones de mentoría están incluidas en tu Seguro LC. Actívalo y solicita tu
+              mentor/a local en Enfermería LC.
             </p>
             <Link
               href="/dashboard/enfermeria-lc"
@@ -217,22 +222,33 @@ export default async function TutoriaPage() {
         )}
       </div>
 
-      {/* Vía 2: profesor (plan de pago) */}
+      {/* Tutoría con profesorado (paquetes) */}
       <div className="bg-white border border-clinic-gray rounded-2xl p-6 space-y-4">
         <div className="flex items-center gap-2">
-          <h2 className="font-bold text-clinic-blue">👩‍🏫 Con un profesor</h2>
+          <h2 className="font-bold text-clinic-blue">👩‍🏫 Tutoría (con profesor)</h2>
           <ViaBadge esProfesor={true} />
           <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-clinic-gold/15 text-clinic-gold">
-            Plan de pago
+            Alumnos matriculados
           </span>
         </div>
-        {premium ? (
-          <ReservarSesion tipo="professor" tutorNombre="un profesor" />
+        {puedeTutoria ? (
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <p className="text-sm text-clinic-blue/50">
+              {Math.max(0, disponiblesProfesor)} de {cupoProfesor} tutorías con profesorado
+              disponibles en tu paquete.
+            </p>
+            <ReservarSesion
+              tipo="professor"
+              tutorNombre="un profesor"
+              disponibles={disponiblesProfesor}
+            />
+          </div>
         ) : (
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <p className="text-clinic-blue/60 text-sm">
-              Las sesiones con profesorado titulado forman parte del <strong>plan de pago</strong>.
-              Mejora tu plan para reservar tutorías personalizadas con un profesor.
+              La tutoría con profesorado titulado está <strong>incluida en los paquetes</strong> de
+              alumno matriculado: <strong>2 tutorías</strong> (mensual) u <strong>8</strong>{' '}
+              (trimestral). Matricúlate para reservarla.
             </p>
             <a
               href="/programa"

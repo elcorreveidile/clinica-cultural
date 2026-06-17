@@ -161,6 +161,7 @@ export async function getSessionUser(): Promise<SessionUser | null> {
       fullName: user.fullName,
       role: user.role,
       currentLevel: user.currentLevel,
+      plan: user.plan ?? null,
     };
   } catch {
     return null;

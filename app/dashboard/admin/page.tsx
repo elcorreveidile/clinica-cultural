@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation';
 import { getSessionUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import RolSelect from '@/components/Admin/RolSelect';
+import PlanSelect from '@/components/Admin/PlanSelect';
 import AltaUsuarioForm from '@/components/Admin/AltaUsuarioForm';
 import NombreEditable from '@/components/Admin/NombreEditable';
 import BajaUsuarioButton from '@/components/Admin/BajaUsuarioButton';
@@ -24,6 +25,7 @@ export default async function AdminPage() {
           email: true,
           fullName: true,
           role: true,
+          plan: true,
           currentLevel: true,
           createdAt: true,
         },
@@ -86,6 +88,7 @@ export default async function AdminPage() {
                 <th className="px-6 py-3 font-medium">Email</th>
                 <th className="px-6 py-3 font-medium">Nombre</th>
                 <th className="px-6 py-3 font-medium">Rol</th>
+                <th className="px-6 py-3 font-medium">Matrícula</th>
                 <th className="px-6 py-3 font-medium">Nivel</th>
                 <th className="px-6 py-3 font-medium">Alta</th>
                 <th className="px-6 py-3 font-medium">Acciones</th>
@@ -100,6 +103,9 @@ export default async function AdminPage() {
                   </td>
                   <td className="px-6 py-3">
                     <RolSelect userId={u.id} rol={u.role} disabled={u.id === user.id} />
+                  </td>
+                  <td className="px-6 py-3">
+                    <PlanSelect userId={u.id} plan={u.plan} />
                   </td>
                   <td className="px-6 py-3 text-clinic-blue/70">{u.currentLevel ?? '—'}</td>
                   <td className="px-6 py-3 text-clinic-blue/50">

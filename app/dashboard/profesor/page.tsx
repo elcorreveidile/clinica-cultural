@@ -2,7 +2,6 @@ import { redirect } from 'next/navigation';
 import { getSessionUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { displayName } from '@/lib/utils';
-import AsignarParejaButton from '@/components/Dashboard/AsignarParejaButton';
 import FeedbackForm from '@/components/Dashboard/FeedbackForm';
 
 export const dynamic = 'force-dynamic';
@@ -14,13 +13,7 @@ export default async function ProfesorPage() {
   if (!user) redirect('/login');
   if (!ROLES_TUTOR.includes(user.role)) redirect('/dashboard');
 
-  const [pendientes, pacientes, portafolios, totalPacientes] = await Promise.all([
-    // Parejas pendientes de asignar
-    prisma.seguroLC.findMany({
-      where: { mentorshipStatus: 'pending', linkedTutorId: null },
-      include: { user: true },
-      orderBy: { mentorshipStartDate: 'asc' },
-    }),
+  const [pacientes, portafolios, totalPacientes] = await Promise.all([
     // Últimos pacientes
     prisma.user.findMany({
       where: { role: 'patient' },
@@ -40,7 +33,6 @@ export default async function ProfesorPage() {
 
   const stats = [
     { label: 'Pacientes', value: totalPacientes, icon: '🧑‍🎓' },
-    { label: 'Parejas pendientes', value: pendientes.length, icon: '🤝' },
     { label: 'Portafolios por revisar', value: portafolios.length, icon: '📂' },
   ];
 
@@ -51,12 +43,12 @@ export default async function ProfesorPage() {
           🩺 Panel del profesor
         </h1>
         <p className="text-clinic-blue/60">
-          Asigna parejas lingüísticas, revisa portafolios y sigue a tus pacientes.
+          Revisa portafolios y sigue a tus pacientes.
         </p>
       </div>
 
       {/* Métricas */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 gap-4">
         {stats.map((s) => (
           <div key={s.label} className="bg-white border border-clinic-gray rounded-2xl p-5 text-center">
             <div className="text-2xl mb-1">{s.icon}</div>
@@ -64,31 +56,6 @@ export default async function ProfesorPage() {
             <div className="text-xs text-clinic-blue/60 mt-1">{s.label}</div>
           </div>
         ))}
-      </div>
-
-      {/* Parejas pendientes (Enfermería LC) */}
-      <div className="bg-white border border-clinic-gray rounded-2xl p-6">
-        <h2 className="font-bold text-clinic-blue mb-4">🤝 Solicitudes de pareja lingüística</h2>
-        {pendientes.length === 0 ? (
-          <p className="text-clinic-blue/50 text-sm">No hay solicitudes pendientes ahora mismo.</p>
-        ) : (
-          <ul className="divide-y divide-clinic-gray/60">
-            {pendientes.map((s) => (
-              <li key={s.id} className="flex items-center justify-between py-3">
-                <div>
-                  <p className="font-medium text-clinic-blue">{displayName(s.user)}</p>
-                  <p className="text-xs text-clinic-blue/50">
-                    Nivel {s.user.currentLevel ?? '—'} · solicitado el{' '}
-                    {s.mentorshipStartDate
-                      ? new Date(s.mentorshipStartDate).toLocaleDateString('es-ES')
-                      : '—'}
-                  </p>
-                </div>
-                <AsignarParejaButton seguroId={s.id} />
-              </li>
-            ))}
-          </ul>
-        )}
       </div>
 
       {/* Portafolios por revisar */}

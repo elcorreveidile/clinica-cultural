@@ -13,7 +13,7 @@ const ROLES_MENTOR = ['tutor_local', 'professor', 'admin'];
 
 const CONSISTE = [
   ['🗓️ Encuentros regulares', 'Quedáis con frecuencia para practicar y resolver dudas.'],
-  ['🌍 Integración real', 'La pareja ayuda a moverse por la vida cotidiana y académica de la UGR.'],
+  ['🌍 Integración real', 'Tu pareja te ayuda a moverte por la vida cotidiana de Granada y la UGR.'],
   ['🔁 Beneficio mutuo', 'El paciente practica español; el mentor, su idioma y cultura.'],
 ];
 
@@ -60,8 +60,8 @@ export default async function EnfermeriaLCPage() {
         </h1>
         <p className="text-clinic-blue/60">
           Mentoría y <strong>parejas lingüísticas</strong>: emparejamos a cada estudiante
-          internacional con un estudiante local para que aprendáis el uno del otro dentro y fuera del
-          aula.
+          internacional con una persona local (de la UGR u otra gente de Granada) para que aprendáis
+          el uno del otro dentro y fuera del aula.
         </p>
       </div>
 
@@ -165,7 +165,7 @@ export default async function EnfermeriaLCPage() {
               <div className="text-5xl mb-4">🤝</div>
               <h2 className="text-xl font-bold text-clinic-blue mb-2">Solicita tu pareja lingüística</h2>
               <p className="text-clinic-blue/60 max-w-md mx-auto mb-5">
-                Te emparejaremos con un estudiante local según tu nivel e intereses. Incluye{' '}
+                Te emparejaremos con una persona local según tu nivel e intereses. Incluye{' '}
                 {seguro.mentoringSessionsTotal} sesiones de acompañamiento.
               </p>
               <SolicitarParejaButton />

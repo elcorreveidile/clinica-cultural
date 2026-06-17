@@ -110,6 +110,10 @@ model User {
   nationality       String?
   nativeLanguage    String?        @map("native_language")
   currentLevel      LanguageLevel? @map("current_level")
+  // Matrícula del alumno: null/ninguno | mensual | trimestral. Define el cupo
+  // de tutorías con profesorado (mensual: 2, trimestral: 8). A futuro lo fijará
+  // el sistema de pagos; de momento lo asigna el admin.
+  plan              String?
   profilePictureUrl String?        @map("profile_picture_url")
   bio               String?
   phone             String?

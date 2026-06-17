@@ -43,7 +43,7 @@ export default function HazteMentor({ nombre, idioma }: { nombre: string; idioma
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h3 className="font-bold text-clinic-blue flex items-center gap-2">
-            🌍 ¿Eres estudiante local en Granada?
+            🌍 ¿Vives en Granada?
           </h3>
           <p className="text-clinic-blue/60 text-sm">
             Únete como <strong>mentor/a</strong>: acompaña a un estudiante internacional, practica su

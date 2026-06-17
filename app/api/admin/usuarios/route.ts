@@ -9,6 +9,7 @@ const cambiarSchema = z.object({
   userId: z.string().uuid(),
   role: z.enum(ROLES).optional(),
   fullName: z.string().max(120).optional(),
+  plan: z.enum(['', 'mensual', 'trimestral']).optional(),
 });
 
 const altaSchema = z.object({
@@ -31,7 +32,7 @@ export async function PATCH(request: NextRequest) {
 
   const parsed = cambiarSchema.safeParse(await request.json());
   if (!parsed.success) return NextResponse.json({ error: 'Datos no válidos' }, { status: 400 });
-  const { userId, role, fullName } = parsed.data;
+  const { userId, role, fullName, plan } = parsed.data;
 
   // Evita que el admin se quite a sí mismo el rol y se quede fuera.
   if (userId === admin.id && role && role !== 'admin') {
@@ -41,9 +42,10 @@ export async function PATCH(request: NextRequest) {
     );
   }
 
-  const data: { role?: (typeof ROLES)[number]; fullName?: string | null } = {};
+  const data: { role?: (typeof ROLES)[number]; fullName?: string | null; plan?: string | null } = {};
   if (role) data.role = role;
   if (fullName !== undefined) data.fullName = fullName.trim() || null;
+  if (plan !== undefined) data.plan = plan || null;
   if (Object.keys(data).length === 0) {
     return NextResponse.json({ error: 'Nada que actualizar' }, { status: 400 });
   }

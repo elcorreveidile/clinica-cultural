@@ -12,6 +12,7 @@ export interface SessionUser {
   fullName: string | null;
   role: UserRole;
   currentLevel: LanguageLevel | null;
+  plan: string | null;
 }
 
 export interface ChatMessage {

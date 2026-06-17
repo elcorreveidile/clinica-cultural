@@ -132,7 +132,7 @@ export default async function SeguroLCPage() {
           </h2>
           <p className="text-clinic-blue/60 mb-6 max-w-md mx-auto">
             {esMentor
-              ? 'Como mentor/a y estudiante local acompañante, actívalo para obtener tu tarjeta digital y disfrutar de los descuentos en actividades culturales.'
+              ? 'Como mentor/a local acompañante, actívalo para obtener tu tarjeta digital y disfrutar de los descuentos en actividades culturales.'
               : 'Actívalo para obtener tu tarjeta digital, sesiones de tutoría con un local y descuentos en actividades culturales.'}
           </p>
           <ActivarSeguroButton />

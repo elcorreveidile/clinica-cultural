@@ -113,7 +113,7 @@ export default async function Home() {
         <p className="text-clinic-blue/70">
           Dentro tienes tu <strong>Diagnóstico</strong> con La Doctora (IA), las{' '}
           <strong>Farmacias lingüísticas</strong> (píldoras de gramática, vocabulario y cultura),{' '}
-          <strong>tutoría y parejas lingüísticas</strong> con estudiantes locales,{' '}
+          <strong>tutoría y parejas lingüísticas</strong> con gente local,{' '}
           <strong>rutas culturales</strong> por la ciudad, la <strong>Escuela de Poetas</strong>, el{' '}
           <strong>Laboratorio de cine</strong> con su mini serie y el <strong>Seguro LC</strong> con
           descuentos en actividades.
@@ -225,17 +225,18 @@ export default async function Home() {
         <div className="bg-clinic-green/5 border border-clinic-green/30 rounded-3xl p-8 md:p-12 grid md:grid-cols-[1.4fr_1fr] gap-8 items-center">
           <div>
             <span className="inline-block px-3 py-1 rounded-full bg-clinic-green/15 text-clinic-green font-semibold text-sm mb-4">
-              ¿Estudias en la UGR?
+              ¿Vives en Granada?
             </span>
             <h2 className="text-2xl md:text-3xl font-bold text-clinic-blue mb-3">
               Hazte mentor/a y acompaña a un estudiante internacional
             </h2>
             <p className="text-clinic-blue/70 mb-4">
-              Únete al programa de <strong>parejas lingüísticas</strong>: practica otros idiomas,
-              conoce gente de todo el mundo y ayuda a alguien a vivir Granada. Como mentor/a recibes
-              tu <strong>tarjeta del Seguro Lingüístico y Cultural</strong> con{' '}
-              <strong>20% de descuento en actividades culturales</strong> y acceso a los encuentros
-              de mentores.
+              Seas <strong>estudiante de la UGR</strong> o simplemente <strong>vivas en Granada</strong>,
+              únete al programa de <strong>parejas lingüísticas</strong>: practica otros idiomas, conoce
+              gente de todo el mundo y ayuda a alguien a vivir la ciudad. Como mentor/a recibes tu{' '}
+              <strong>tarjeta del Seguro Lingüístico y Cultural</strong> con{' '}
+              <strong>20% de descuento en actividades culturales</strong> y acceso a los encuentros de
+              mentores.
             </p>
             <Link
               href="/dashboard/enfermeria-lc"

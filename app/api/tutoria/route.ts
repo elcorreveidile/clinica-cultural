@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { getSessionUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { tienePlanProfesor } from '@/lib/planes';
+import { puedeTutoriaProfesor, cupoTutoriasEfectivo } from '@/lib/planes';
 
 const ROLES_TUTOR = ['professor', 'tutor_local', 'admin'];
 const ROLES_PROFESOR = ['professor', 'admin'];
@@ -42,12 +42,23 @@ export async function POST(request: NextRequest) {
   }
   const notes = clean(parsed.data.notes);
 
-  // ── Vía profesor (plan de pago) ──
+  // ── Vía profesor: tutoría (profesor ↔ alumno matriculado, incluida en el paquete) ──
   if (parsed.data.tipo === 'professor') {
-    if (!tienePlanProfesor(user)) {
+    if (!puedeTutoriaProfesor(user)) {
       return NextResponse.json(
-        { error: 'La tutoría con profesorado está incluida en el plan de pago.' },
+        { error: 'La tutoría con profesorado está incluida en los paquetes de alumno matriculado.' },
         { status: 403 }
+      );
+    }
+    // Cupo según el plan: sesiones de profesorado (sin Seguro LC) no canceladas
+    // no pueden superar las incluidas en el paquete.
+    const usadasProfesor = await prisma.sesionTutoria.count({
+      where: { patientId: user.id, seguroLcId: null, status: { not: 'cancelled' } },
+    });
+    if (usadasProfesor >= cupoTutoriasEfectivo(user)) {
+      return NextResponse.json(
+        { error: 'Has agotado las tutorías con profesorado incluidas en tu paquete.' },
+        { status: 400 }
       );
     }
     const sesion = await prisma.sesionTutoria.create({
