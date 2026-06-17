@@ -3,6 +3,8 @@ import { getSessionUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import RolSelect from '@/components/Admin/RolSelect';
 import AltaUsuarioForm from '@/components/Admin/AltaUsuarioForm';
+import NombreEditable from '@/components/Admin/NombreEditable';
+import BajaUsuarioButton from '@/components/Admin/BajaUsuarioButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -86,19 +88,25 @@ export default async function AdminPage() {
                 <th className="px-6 py-3 font-medium">Rol</th>
                 <th className="px-6 py-3 font-medium">Nivel</th>
                 <th className="px-6 py-3 font-medium">Alta</th>
+                <th className="px-6 py-3 font-medium">Acciones</th>
               </tr>
             </thead>
             <tbody>
               {users.map((u) => (
                 <tr key={u.id} className="border-b border-clinic-gray/60 last:border-0">
                   <td className="px-6 py-3 text-clinic-blue font-medium">{u.email}</td>
-                  <td className="px-6 py-3 text-clinic-blue/70">{u.fullName ?? '—'}</td>
+                  <td className="px-6 py-3">
+                    <NombreEditable userId={u.id} nombre={u.fullName} />
+                  </td>
                   <td className="px-6 py-3">
                     <RolSelect userId={u.id} rol={u.role} disabled={u.id === user.id} />
                   </td>
                   <td className="px-6 py-3 text-clinic-blue/70">{u.currentLevel ?? '—'}</td>
                   <td className="px-6 py-3 text-clinic-blue/50">
                     {new Date(u.createdAt).toLocaleDateString('es-ES')}
+                  </td>
+                  <td className="px-6 py-3">
+                    <BajaUsuarioButton userId={u.id} email={u.email} disabled={u.id === user.id} />
                   </td>
                 </tr>
               ))}

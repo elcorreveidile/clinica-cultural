@@ -21,7 +21,10 @@ export default async function FarmaciasPage() {
   const user = await getSessionUser();
   if (!user) redirect('/login');
 
-  const farmacias = await prisma.farmacia.findMany({ orderBy: { name: 'asc' } });
+  const farmacias = await prisma.farmacia.findMany({
+    orderBy: { name: 'asc' },
+    include: { _count: { select: { recursos: true } } },
+  });
 
   return (
     <div className="space-y-4 animate-fade-in">
@@ -46,7 +49,7 @@ export default async function FarmaciasPage() {
               label: f.category,
               icon: '💊',
             };
-            const n = recursosDe(f.category).length;
+            const n = f._count.recursos > 0 ? f._count.recursos : recursosDe(f.category).length;
             return (
               <Link
                 key={f.id}

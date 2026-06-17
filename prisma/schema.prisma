@@ -238,7 +238,9 @@ model SeguroLC {
 model Farmacia {
   id             String            @id @default(uuid()) @db.Uuid
   name           String
-  category       FarmaciaCategory?
+  // Categoría libre (texto) para permitir nuevas farmacias en el futuro
+  // (enfermería, clínica del habla, olores y sabores…), sin un enum cerrado.
+  category       String?
   targetLevel    LanguageLevel?    @map("target_level")
   iconUrl        String?           @map("icon_url")
   description    String?
@@ -261,6 +263,13 @@ model Recurso {
   description     String?
   durationMinutes Int?           @map("duration_minutes")
   difficultyLevel LanguageLevel? @map("difficulty_level")
+  // Contenido gestionable desde el editor (paso 3: contenido en BD).
+  content         String?        // cuerpo en markdown
+  lexico          Json?          // mapa palabra→definición (RAE)
+  dosis           String?        // pildora | jarabe | pomada | inyeccion
+  formato         String?        // texto | ejercicio | video | audio | interactivo
+  posicion        Int?           // orden dentro de la farmacia
+  slug            String?        // clave estable (para importación idempotente)
   createdAt       DateTime       @default(now()) @map("created_at")
 
   @@index([farmaciaId])

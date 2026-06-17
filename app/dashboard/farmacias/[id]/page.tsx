@@ -2,7 +2,8 @@ import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import { getSessionUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { recursosDe, DOSIS, FORMATO_LABEL } from '@/lib/recursos';
+import { DOSIS, FORMATO_LABEL } from '@/lib/recursos';
+import { getRecursosDeFarmacia } from '@/lib/recursosDb';
 import ChatMarkdown from '@/components/Chat/ChatMarkdown';
 import RecursoPdfButton from '@/components/RecursoPdfButton';
 import LexicoChip from '@/components/LexicoChip';
@@ -25,7 +26,7 @@ export default async function FarmaciaDetallePage({ params }: { params: { id: st
   const farmacia = await prisma.farmacia.findUnique({ where: { id: params.id } });
   if (!farmacia) notFound();
 
-  const recursos = recursosDe(farmacia.category);
+  const recursos = await getRecursosDeFarmacia(farmacia);
 
   return (
     <div className="space-y-6 animate-fade-in">
