@@ -96,6 +96,52 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Introducción — qué es la Clínica y acceso gratuito */}
+      <section className="max-w-4xl mx-auto px-6 pt-16 pb-4 text-center animate-fade-in">
+        <span className="inline-block px-4 py-1 rounded-full bg-clinic-green/10 text-clinic-green font-semibold text-sm mb-4">
+          Bienvenido/a a la consulta
+        </span>
+        <h2 className="text-3xl md:text-4xl font-bold text-clinic-blue mb-4">
+          Tu español, diagnosticado y tratado en Granada
+        </h2>
+        <p className="text-lg text-clinic-blue/70 mb-4">
+          La Clínica Cultural y Lingüística de Español es otra forma de aprender: te{' '}
+          <strong>diagnosticamos</strong> el nivel, diseñamos un <strong>plan de tratamiento</strong> a
+          tu medida y lo aplicamos con recursos, cultura y conversación real. Aquí el español no se
+          estudia: se <strong>vive</strong>.
+        </p>
+        <p className="text-clinic-blue/70">
+          Dentro tienes tu <strong>Diagnóstico</strong> con La Doctora (IA), las{' '}
+          <strong>Farmacias lingüísticas</strong> (píldoras de gramática, vocabulario y cultura),{' '}
+          <strong>tutoría y parejas lingüísticas</strong> con estudiantes locales,{' '}
+          <strong>rutas culturales</strong> por la ciudad, la <strong>Escuela de Poetas</strong>, el{' '}
+          <strong>Laboratorio de cine</strong> con su mini serie y el <strong>Seguro LC</strong> con
+          descuentos en actividades.
+        </p>
+
+        <div className="bg-clinic-gold/10 border border-clinic-gold/30 rounded-2xl p-5 my-7">
+          <p className="text-clinic-blue/80">
+            🎁 <strong>Cualquiera puede entrar.</strong> Regístrate gratis y prueba el diagnóstico,
+            unas consultas con La Doctora y una muestra de los recursos. Sin compromiso.
+          </p>
+        </div>
+
+        <div className="flex flex-wrap justify-center gap-4">
+          <Link
+            href={user ? '/dashboard' : '/login'}
+            className="inline-block px-8 py-3.5 bg-clinic-red text-white font-bold rounded-xl shadow-lg shadow-clinic-red/20 hover:bg-clinic-red/90 transition"
+          >
+            Empezar mi diagnóstico
+          </Link>
+          <Link
+            href="/programa"
+            className="inline-block px-8 py-3.5 border border-clinic-blue/30 text-clinic-blue font-semibold rounded-xl hover:bg-clinic-blue/5 transition"
+          >
+            Conocer el programa
+          </Link>
+        </div>
+      </section>
+
       {/* Features con iconos propios */}
       <section className="max-w-6xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
